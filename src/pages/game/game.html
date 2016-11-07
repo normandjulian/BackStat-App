@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Ajouter un match</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Equipe adverse</ion-label>
+      <ion-input [(ngModel)]="game_opponent" type="text" placeholder="Guerrier du Pont en Or"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Date du match</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DDDD MMMM YYYY" min="2016" [(ngModel)]="game_date" placeholder="12/11/2017"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Match à domicile ?</ion-label>
+      <ion-checkbox [(ngModel)]="game_home"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <button class="button button-full button-positive" (click)="save_game();">
+    Créer un match
+  </button>
+</ion-content>

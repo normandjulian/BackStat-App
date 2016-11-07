@@ -1,0 +1,16 @@
+page-team {
+  ion-grid {
+    h1 {
+      color: white;
+      text-align: center;
+    }
+    ion-row {
+      ion-col {
+        ion-list {
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+    }
+  }
+}

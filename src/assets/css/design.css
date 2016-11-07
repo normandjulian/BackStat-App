@@ -1,0 +1,116 @@
+.circle-action > * {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -3em;
+    width: 6em;
+    height: 6em;
+}
+.circle-action > *:nth-of-type(1) {
+    -webkit-transform: rotate(0deg) translate(7em) rotate(0deg);
+    transform: rotate(0deg) translate(7em) rotate(0deg);
+}
+.circle-action > *:nth-of-type(2) {
+    -webkit-transform: rotate(51.42857142857143deg) translate(7em) rotate(-51.42857142857143deg);
+    transform: rotate(51.42857142857143deg) translate(7em) rotate(-51.42857142857143deg);
+}
+.circle-action > *:nth-of-type(3) {
+    -webkit-transform: rotate(102.85714285714286deg) translate(7em) rotate(-102.85714285714286deg);
+    transform: rotate(102.85714285714286deg) translate(7em) rotate(-102.85714285714286deg);
+}
+.circle-action > *:nth-of-type(4) {
+    -webkit-transform: rotate(154.28571428571429deg) translate(7em) rotate(-154.28571428571429deg);
+    transform: rotate(154.28571428571429deg) translate(7em) rotate(-154.28571428571429deg);
+}
+.circle-action > *:nth-of-type(5) {
+    -webkit-transform: rotate(205.71428571428572deg) translate(7em) rotate(-205.71428571428572deg);
+    transform: rotate(205.71428571428572deg) translate(7em) rotate(-205.71428571428572deg);
+}
+.circle-action > *:nth-of-type(6) {
+    -webkit-transform: rotate(257.14285714285715deg) translate(7em) rotate(-257.14285714285715deg);
+    transform: rotate(257.14285714285715deg) translate(7em) rotate(-257.14285714285715deg);
+}
+.circle-action > *:nth-of-type(7) {
+    -webkit-transform: rotate(308.57142857142858deg) translate(7em) rotate(-308.57142857142858deg);
+    transform: rotate(308.57142857142858deg) translate(7em) rotate(-308.57142857142858deg);
+}
+.circle-action img {
+    display: block;
+    max-width: 100%;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: .15s;
+    transition: .15s;
+}
+.circle-action img:hover {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+.circle-player > * {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -3em;
+    width: 6em;
+    height: 6em;
+}
+.circle-player > *:nth-of-type(1) {
+    -webkit-transform: rotate(0deg) translate(8em) rotate(0deg);
+    transform: rotate(0deg) translate(8em) rotate(0deg);
+}
+.circle-player > *:nth-of-type(2) {
+    -webkit-transform: rotate(36deg) translate(8em) rotate(-36deg);
+    transform: rotate(36deg) translate(8em) rotate(-36deg);
+}
+.circle-player > *:nth-of-type(3) {
+    -webkit-transform: rotate(72deg) translate(8em) rotate(-72deg);
+    transform: rotate(72deg) translate(8em) rotate(-72deg);
+}
+.circle-player > *:nth-of-type(4) {
+    -webkit-transform: rotate(108deg) translate(8em) rotate(-108deg);
+    transform: rotate(108deg) translate(8em) rotate(-108deg);
+}
+.circle-player > *:nth-of-type(5) {
+    -webkit-transform: rotate(144deg) translate(8em) rotate(-144deg);
+    transform: rotate(144deg) translate(8em) rotate(-144deg);
+}
+.circle-player > *:nth-of-type(6) {
+    -webkit-transform: rotate(180deg) translate(8em) rotate(-180deg);
+    transform: rotate(180deg) translate(8em) rotate(-180deg);
+}
+.circle-player > *:nth-of-type(7) {
+    -webkit-transform: rotate(216deg) translate(8em) rotate(-216deg);
+    transform: rotate(216deg) translate(8em) rotate(-216deg);
+}
+.circle-player > *:nth-of-type(8) {
+    -webkit-transform: rotate(252deg) translate(8em) rotate(-252deg);
+    transform: rotate(252deg) translate(8em) rotate(-252deg);
+}
+.circle-player > *:nth-of-type(9) {
+    -webkit-transform: rotate(288deg) translate(8em) rotate(-288deg);
+    transform: rotate(288deg) translate(8em) rotate(-288deg);
+}
+.circle-player > *:nth-of-type(10) {
+    -webkit-transform: rotate(324deg) translate(8em) rotate(-324deg);
+    transform: rotate(324deg) translate(8em) rotate(-324deg);
+}
+.circle-player > *:nth-of-type(11) {
+    -webkit-transform: rotate(360deg) translate(8em) rotate(-360deg);
+    transform: rotate(360deg) translate(8em) rotate(-360deg);
+}
+
+.circle-player img {
+    display: block;
+    max-width: 100%;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: .15s;
+    transition: .15s;
+}
+.circle-player img:hover {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Back-Stat</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-40>
+        <button (tap)="goto_team('add');">
+          <ion-icon name="add"></ion-icon>
+        </button>
+        <button (tap)="goto_team('update');">
+          <ion-icon name="eye"></ion-icon>
+        </button>
+        <button (tap)="delete_team();">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+        <button (tap)="refresh_team();">
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+        <br/>
+        <ion-card *ngFor="let team of teams" (tap)="select_team(team);" [class.assertive]="team === selected_team">
+          <ion-card-content>
+            {{team.name}}
+            <br/>
+            {{team.coach}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col width-60>
+        <button (tap)="goto_game('add');">
+          <ion-icon name="add"></ion-icon>
+        </button>
+        <button (tap)="goto_game('update');">
+          <ion-icon name="eye"></ion-icon>
+        </button>
+        <button (tap)="delete_game();">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+        <button (tap)="refresh_game();">
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+        <button (tap)="goto_stat();">
+          <ion-icon name="basketball"></ion-icon>
+        </button>
+        <ion-card *ngFor="let game of games" (tap)="select_game(game);" [class.assertive]="game === selected_game">
+          <ion-card-content>
+            {{game.opponent}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

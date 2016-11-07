@@ -1,0 +1,21 @@
+page-dashboard {
+  .header {
+    color: white;
+  }
+
+  button {
+    ion-icon {
+      color: white;
+    }
+  }
+  ion-card-content {
+    button {
+      float: right;
+      ion-icon {
+        color: #bd5a22;
+      }
+    }
+  }
+
+
+}

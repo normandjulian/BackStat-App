@@ -1,0 +1,16 @@
+page-login {
+  ion-content {
+    div.logo {
+      text-align: center;
+    }
+    ion-list {
+      padding-left: 200px;
+      padding-right: 200px;
+
+      .reverse {
+        background-color: transparent;
+        color: $orange;
+      }
+    }
+  }
+}

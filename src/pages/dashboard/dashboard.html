@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Accueil</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-40>
+
+        <div class="header">
+          <h1>Vos équipes
+            <button ion-button icon-only outline color="white" (tap)="manage_team()">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </h1>
+        </div> <!-- header -->
+
+        <ion-card *ngFor="let team of teams">
+          <ion-card-header>
+            {{team.name}} - {{team.coach}}
+          </ion-card-header>
+          <ion-card-content>
+            <button ion-button icon-only clear (tap)="manage_team(team._id)">
+              <ion-icon name="eye"></ion-icon>
+            </button>
+            <button ion-button icon-only clear>
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+      <ion-col width-60>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
