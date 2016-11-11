@@ -27,6 +27,10 @@ export class Team {
     'players' : null
   };
   private selected_player : Player = null;
+  private fields          : Object = {
+    'bSaveTeam' : '',
+    'bSavePlayer' : ''
+  };
 
   constructor (
     private navController: NavController,
@@ -35,18 +39,38 @@ export class Team {
     private formBuilder: FormBuilder,
     private teamService: TeamService) {}
 
-  save ( value ) {
-    this.teamService.save( value ).subscribe(
-      res => this.get_team( res['_id'] ),
-      err => console.error( err )
-    )
+  save_team ( value ) {
+    if ( this.team['_id'] ) {
+      this.teamService.update_team( value, this.team._id ).subscribe(
+        res => this.get_team( res['_id'] ),
+        err => console.error( err )
+      )
+    } else {
+      this.teamService.create_team( value ).subscribe(
+        res => this.get_team( res['_id'] ),
+        err => console.error( err )
+      )
+    }
   }
 
   get_team ( _team_id ) {
     this.teamService.get_team( _team_id ).subscribe(
-      res => console.log(res),
-      err => console.error(err)
+      res => this.initFields( res ),
+      err => console.error( err )
     )
+  }
+
+  initFields ( _data ) {
+    if ( !!_data ) {
+      this.team = _data;
+      this.teamForm.setValue({
+        name: this.team.name,
+        coach: this.team.coach || null
+      });
+      this.fields['bSaveTeam'] = 'Modifier l\'équipe';
+    } else {
+      this.fields['bSaveTeam'] = 'Créer une équipe';
+    }
   }
 
   update_team ( _name, _coach ) { }
@@ -60,13 +84,40 @@ export class Team {
       let player = value;
       player.team_id = this.team._id;
       this.teamService.create_player( player ).subscribe(
-        res => console.log( res ),
+        res => {
+          this.team.players.push({
+            _id       : res._id,
+            firstname : res.firstname,
+            lastname  : res.lastname,
+            number    : res.number,
+            team_id   : res.team_id
+          })
+        },
         err => console.error( err )
       );
     }
   };
 
-  select_player ( _player ) { }
+  select_player ( _player ) {
+    if ( !!_player ) {
+      this.selected_player = _player;
+      this.playerForm.setValue({
+        firstname : this.selected_player['firstname'],
+        lastname  : this.selected_player['lastname'],
+        number    : this.selected_player['number']
+      });
+      this.fields['bSavePlayer'] = 'Modifier le joueur';
+    } else {
+      this.selected_player = null;
+      this.playerForm.setValue({
+        firstname : '',
+        lastname  : '',
+        number    : ''
+      });
+      this.fields['bSavePlayer'] = 'Créer un joueur';
+    }
+
+  }
 
   change_mode ( ) { // ++++++++++++++++++++++++++++++++++++++++++> Mode [Create]
 
@@ -84,16 +135,9 @@ export class Team {
     });
 
     if ( !!this.navParams.get('_id') ) {
-      this.teamService.get_team( this.navParams.get('_id') ).subscribe(
-        res => {
-          this.team = res;
-          this.teamForm.setValue({
-            name: this.team.name,
-            coach: this.team.coach || null
-          });
-        },
-        err => console.error( err )
-      );
+      this.get_team( this.navParams.get('_id') );
+    } else {
+      this.initFields( null );
     }
   }
 }

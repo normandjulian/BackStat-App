@@ -20,12 +20,22 @@ export class TeamService {
     private http: Http,
     private backstatService : BackstatService ) { }
 
-  save ( team ): Observable<Object> {
+  create_team ( team ): Observable<Object> {
     let body = { name: team.name, coach: team.coach || null }
     let headers = new Headers({ 'x-access-token': this.backstatService.get_token() });
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(`${this.URI}/teams`, body, options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  update_team ( _team, _id ): Observable<TeamFull> {
+    let body = { name: _team.name, coach: _team.coach || null }
+    let headers = new Headers({ 'x-access-token': this.backstatService.get_token() });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(`${this.URI}/teams/${_id}`, body, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

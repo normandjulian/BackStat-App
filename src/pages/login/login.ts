@@ -62,7 +62,7 @@ export class Login implements OnInit {
     this.navController.push( Register );
   }
 
-  save_credits() {
+  save_credits () {
     // TODO
     console.log('TODO');
   }
