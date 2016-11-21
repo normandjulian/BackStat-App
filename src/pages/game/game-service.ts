@@ -4,53 +4,43 @@ import { Http,
          RequestOptions,
          Response }         from '@angular/http';
 import { Observable }       from 'rxjs/Rx';
-import { TeamFull }         from '../../classes/team-full-class';
-import { Player }           from '../../classes/player.class'
+import { Game }          from '../../classes/game-class';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class TeamService {
+export class GameService {
   public URI     : string = "http://127.0.0.1:3000/api";
   public headers : Object = { 'Content-Type': 'application/json' }
   constructor( public http: Http ) { }
 
-  create_team ( team ): Observable<Object> {
-    let body = { name: team.name, coach: team.coach || null }
+  create_game ( game ): Observable<Object> {
+    let body = { name: game.name, coach: game.coach || null }
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(`${this.URI}/teams`, body, options)
+    return this.http.post(`${this.URI}/games`, body, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  update_team ( _team, _id ): Observable<TeamFull> {
-    let body = { name: _team.name, coach: _team.coach || null }
+  update_game ( _game, _id ): Observable<Game> {
+    let body = { name: _game.name, coach: _game.coach || null }
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.put(`${this.URI}/teams/${_id}`, body, options)
+    return this.http.put(`${this.URI}/games/${_id}`, body, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  get_team ( _team_id ): Observable<TeamFull> {
+  get_game ( _game_id ): Observable<Game> {
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(`${this.URI}/teams/${_team_id}/players`, options)
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-  }
-
-  create_player ( _player ): Observable<Player> {
-    let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.post(`${this.URI}/players`, _player, options)
+    return this.http.get(`${this.URI}/games/${_game_id}/players`, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

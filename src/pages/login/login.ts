@@ -3,28 +3,28 @@ import { NavController,
   Platform,
   AlertController,
   NavParams }                 from 'ionic-angular';
-import { BackstatSrv }        from '../../providers/backstat/backstat';
-import { HomePage }           from '../home/home';
 import { Register }           from '../register/register';
-import { Dashboard }          from '../dashboard/dashboard';
+import { DashboardPage }      from '../dashboard/dashboard';
 import { LoginService }       from './login-service'
+import { Guest }              from '../../classes/guest-class';
 
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
   providers: [ LoginService ]
 })
+
 export class Login implements OnInit {
-  private user: any;
-  private isLogged: Boolean = false;
-  private guest: Object = {};
+  public user: any;
+  public isLogged: Boolean = false;
+  public guest: Guest = null;
 
   constructor (
-    private platform: Platform,
-    private navController: NavController,
-    private loginService: LoginService,
-    private alertCtrl: AlertController,
-    private navParams: NavParams ) {
+    public platform: Platform,
+    public navController: NavController,
+    public loginService: LoginService,
+    public alertCtrl: AlertController,
+    public navParams: NavParams ) {
 
       platform.ready().then(() => {
         this.guest = { email : 'normandjulian@gmail.com', password: 'julian'};
@@ -42,15 +42,15 @@ export class Login implements OnInit {
   }
 
   sign_in ( ) {
-    if ((!!this.guest['email']) || (!!this.guest['password'])) {
-      this.loginService.sign_in({ email: this.guest['email'], password: this.guest['password'] })
-        .then(
+    if ((!!this.guest.email) || (!!this.guest.password)) {
+      this.loginService.sign_in({ email: this.guest.email, password: this.guest.password })
+        .subscribe(
           res => {
             if ( res['error'] ) {
-              this.notification(res.message);
+              this.notification(res['message']);
             } else {
-              this.loginService.set_user( res );
-              this.navController.push( Dashboard );
+              localStorage.setItem('user', JSON.stringify(res));
+              this.navController.push( DashboardPage );
             }
           },
           err => console.error( err )
@@ -68,7 +68,6 @@ export class Login implements OnInit {
   }
 
   ngOnInit() {
-    // this.guest.email = this.navParams.get('email');
     if ( typeof this.navParams.get('email') !== 'undefined' ) {
       this.guest['email'] = this.navParams.get('email')
     }

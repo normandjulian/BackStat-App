@@ -1,54 +1,49 @@
-import { Component }                from '@angular/core';
-import { NavController, Platform }  from 'ionic-angular';
-// import { BackstatSrv }              from '../../providers/backstat/backstat';
-import { Game }                     from '../../classes/game.int'
+import { Component,
+         OnInit }         from '@angular/core';
+import { NavController,
+         NavParams }      from 'ionic-angular';
+import { FormBuilder,
+         FormGroup,
+         Validators }     from '@angular/forms';
+import { Game }           from '../../classes/game-class'
+import { GameService }    from './game-service';
 
 @Component({
+  selector: 'game-page',
   templateUrl: 'game.html',
+  providers: [ GameService ]
 })
-export class GamePage {
-  private game_opponent:  String;
-  private game_date:      Date;
-  private game_home:      Boolean;
-  private selected_game:  Game = null;
+
+export class GamePage implements OnInit {
+  public gameForm = null;
+  public game : Game = {
+    '_id'     : null,
+    'opponent': null,
+    'date'    : null,
+    'home'    : null,
+    'team_id' : null
+  }
+  public fields : any = {
+    'bSaveGame' : ''
+  };
 
   constructor (
-    private navController: NavController,
-    // private backstatSrv: BackstatSrv,
-    private platform: Platform ) {
-      platform.ready().then(() => {
-          // this.selected_game = this.backstatSrv.get_selected_game();
+    public navController: NavController,
+    public navParams: NavParams,
+    public gameService: GameService,
+    public formBuilder: FormBuilder ) { }
 
-          if ( !!this.selected_game ) {
-            this.game_opponent  = this.selected_game.opponent;
-            this.game_date = this.selected_game.date;
-            this.game_home = this.selected_game.home;
-          }
-      });
-    }
-
-
-    save_game () {
-      if (( !!this.game_opponent ) || ( !!this.game_date )) {
-        if (!!this.selected_game) { // +++++++++++++++++++++++++++++++++> Mode [Update]
-          // this.backstatSrv.update_game( _opponent, _date )
-          //   .then( res => {
-          //     if ( res['error'] ) {
-          //       console.log(res.message);
-          //     } else {
-          //       this.navController.pop();
-          //     }
-          //   })
-        } else { // ++++++++++++++++++++++++++++++++++++++++++++++++++> Mode [Create]
-          // this.backstatSrv.create_game( this.game_opponent, this.game_date, this.game_home )
-          //   .then( res => {
-          //     if ( res['error'] ) {
-          //       console.log(res.message);
-          //     } else {
-          //       this.navController.pop();
-          //     }
-          //   });
-        }
+    save_game ( _value ) {
+      if ( this.game['_id'] ) {
+        this.gameService.update_game( _value, this.game._id ).subscribe(
+          res => this.get_game( res['_id'] ),
+          err => console.error( err )
+        )
+      } else {
+        this.gameService.create_game( _value ).subscribe(
+          res => this.get_game( res['_id'] ),
+          err => console.error( err )
+        )
       }
     }
 
@@ -61,5 +56,23 @@ export class GamePage {
       //       this.navController.pop();
       //     }
       //   })
+    }
+
+    get_game ( _id ) {}
+
+    initFields ( _data ) {}
+
+    ngOnInit () {
+      this.gameForm = this.formBuilder.group({
+          opponent  : ['', [<any>Validators.required]],
+          date : ['', [<any>Validators.required]],
+          home : ['']
+      });
+
+      if ( !!this.navParams.get('_id') ) {
+        this.get_game( this.navParams.get('_id') );
+      } else {
+        this.initFields( null );
+      }
     }
 }

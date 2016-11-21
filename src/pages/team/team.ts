@@ -4,7 +4,6 @@ import { NavController,
          NavParams }      from 'ionic-angular';
 import { FormBuilder,
          FormGroup,
-         FormControl,
          Validators }     from '@angular/forms';
 import { TeamService }    from './team-service';
 import { TeamFull }       from '../../classes/team-full-class'
@@ -16,28 +15,28 @@ import { Player }         from '../../classes/player.class'
   providers: [ TeamService ]
 })
 
-export class Team {
-  private teamForm        : FormGroup;
-  private playerForm      : FormGroup;
-  private isNew           : Boolean = true;
-  private team            : TeamFull = {
+export class TeamPage {
+  public teamForm = null;
+  public playerForm      : FormGroup;
+  public isNew           : Boolean = true;
+  public team            : TeamFull = {
     '_id'     : null,
     'name'    : null,
     'coach'   : null,
     'players' : null
   };
-  private selected_player : Player = null;
-  private fields          : Object = {
+  public selected_player : Player = null;
+  public fields          : any = {
     'bSaveTeam' : '',
     'bSavePlayer' : ''
   };
 
   constructor (
-    private navController: NavController,
-    private navParams: NavParams,
-    private platform: Platform,
-    private formBuilder: FormBuilder,
-    private teamService: TeamService) {}
+    public navController: NavController,
+    public navParams: NavParams,
+    public platform: Platform,
+    public formBuilder: FormBuilder,
+    public teamService: TeamService) {}
 
   save_team ( value ) {
     if ( this.team['_id'] ) {
@@ -68,6 +67,11 @@ export class Team {
         coach: this.team.coach || null
       });
       this.fields['bSaveTeam'] = 'Modifier l\'équipe';
+      if ( !!this.team.players ) {
+        this.select_player( this.team.players[0] );
+      } else {
+        this.select_player( null );
+      }
     } else {
       this.fields['bSaveTeam'] = 'Créer une équipe';
     }
@@ -92,6 +96,11 @@ export class Team {
             number    : res.number,
             team_id   : res.team_id
           })
+          this.playerForm.setValue({
+            firstname : null,
+            lastname  : null,
+            number    : null
+          });
         },
         err => console.error( err )
       );

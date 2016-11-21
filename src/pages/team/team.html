@@ -19,23 +19,28 @@
         <ion-input type="text" placeholder="Steve Kerr" formControlName=coach></ion-input>
       </ion-item>
 
-      <button type="submit" [disabled]="!teamForm.valid" ion-button full color="tango">{{this.fields.bSaveTeam}}</button>
+      <button type="submit" [disabled]="!teamForm.valid" ion-button full color="tango">{{fields.bSaveTeam}}</button>
     </ion-list>
   </form>
   <ion-grid *ngIf="team.players">
-    <h1>{{team.players.length}} joueurs dans l'équipe</h1>
+    <h1>{{team.players.length}} joueurs dans l'équipe
+      <button [hidden]="!selected_player" ion-button icon-only outline color="white" (tap)="select_player( null )">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </h1>
     <ion-row>
       <ion-col width-50>
         <ion-list>
           <ion-item *ngFor="let player of team.players" (tap)="select_player( player );">
             #{{player.number}} - {{player.lastname}} {{player.firstname}}
+            <button [disabled]="!selected_player" ion-button icon-only outline color="tango">
+              <ion-icon name="trash"></ion-icon>
+            </button>
           </ion-item>
         </ion-list>
       </ion-col>
 
       <ion-col width-50>
-        <button [hidden]="!selected_player" ion-button color="tango" (tap)="select_player( null )"><ion-icon name="add"></ion-icon></button>
-        <button [hidden]="!selected_player" ion-button color="tango"><ion-icon name="trash"></ion-icon></button>
         <form [formGroup]="playerForm" novalidate (ngSubmit)="save_player( playerForm.value )">
           <ion-list>
             <ion-item>
@@ -52,8 +57,7 @@
               <ion-label stacked>Numéro du joueur</ion-label>
               <ion-input formControlName=number type="number" placeholder="30"></ion-input>
             </ion-item>
-            <button type="submit" [disabled]="!playerForm.valid" ion-button full color="tango">{{this.fields.bSavePlayer}}</button>
-            {{this.fields}}
+            <button type="submit" [disabled]="!playerForm.valid" ion-button full color="tango">{{fields.bSavePlayer}}</button>
           </ion-list>
         </form>
       </ion-col>

@@ -11,13 +11,13 @@
 
         <div class="header">
           <h1>Vos équipes
-            <button ion-button icon-only outline color="white" (tap)="manage_team()">
+            <button ion-button icon-only outline color="white" (tap)="manage_team( null )">
               <ion-icon name="add"></ion-icon>
             </button>
           </h1>
         </div> <!-- header -->
 
-        <ion-card *ngFor="let team of teams">
+        <ion-card *ngFor="let team of teams" (tap)="select_team(team)" [class.selected]="team === selected_team">
           <ion-card-header>
             {{team.name}} - {{team.coach}}
           </ion-card-header>
@@ -25,7 +25,7 @@
             <button ion-button icon-only clear (tap)="manage_team(team._id)">
               <ion-icon name="eye"></ion-icon>
             </button>
-            <button ion-button icon-only clear>
+            <button ion-button icon-only clear (tap)="delete_team(team._id)">
               <ion-icon name="trash"></ion-icon>
             </button>
           </ion-card-content>
@@ -33,6 +33,13 @@
 
       </ion-col>
       <ion-col width-60>
+        <div class="header">
+          <h1>Vos matchs
+            <button ion-button icon-only outline color="white" (tap)="manage_game( null )">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </h1>
+        </div> <!-- header -->
 
       </ion-col>
     </ion-row>

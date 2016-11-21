@@ -5,16 +5,16 @@ import { MyApp }                from './app.component';
 import { BackstatService }      from '../providers/backstat-service';
 import { FormsModule,
          ReactiveFormsModule }  from '@angular/forms';
-import { RouterModule }         from '@angular/router';
 import { HttpModule }           from '@angular/http';
 
 // pages
 import { HomePage }             from '../pages/home/home';
-import { Dashboard }            from '../pages/dashboard/dashboard';
+import { DashboardPage }            from '../pages/dashboard/dashboard';
 import { TimerComponent }       from '../pages/timer/timer';
 import { Login }                from '../pages/login/login';
 import { Register }             from '../pages/register/register';
-import { Team }                 from '../pages/team/team';
+import { TeamPage }             from '../pages/team/team';
+import { GamePage }             from '../pages/game/game';
 
 @NgModule({
   declarations: [
@@ -22,8 +22,10 @@ import { Team }                 from '../pages/team/team';
     Login,
     Register,
     HomePage,
-    Dashboard,
-    Team
+    DashboardPage,
+    TeamPage,
+    GamePage,
+    TimerComponent
   ],
   imports: [
     FormsModule,
@@ -37,8 +39,10 @@ import { Team }                 from '../pages/team/team';
     Login,
     Register,
     HomePage,
-    Dashboard,
-    Team
+    DashboardPage,
+    TeamPage,
+    GamePage,
+    TimerComponent
   ],
   providers: [
     BackstatService

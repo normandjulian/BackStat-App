@@ -4,8 +4,7 @@ import { Http,
          RequestOptions,
          Response }         from '@angular/http';
 import { Observable }       from 'rxjs/Rx';
-import { BackstatService }  from '../../providers/backstat-service';
-import { TeamInt }          from '../../classes/team-class';
+import { Team }          from '../../classes/team-class';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -13,18 +12,25 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class DashboardService {
-  private URI     : string = "http://127.0.0.1:3000/api";
-  private headers : Object = { 'Content-Type': 'application/json' }
-  constructor(
-    private http: Http,
-    private backstatService : BackstatService ) { }
+  public URI     : string = "http://127.0.0.1:3000/api";
+  public headers : Object = { 'Content-Type': 'application/json' }
+  constructor( public http: Http ) { }
 
-  get_teams() : Observable<TeamInt[]> {
-    let headers = new Headers({ 'x-access-token': this.backstatService.get_token() });
+  get_teams() : Observable<Team[]> {
+    let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
     return this.http.get(`${this.URI}/teams`, options)
-      .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
+      .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
-   }
+  }
+
+  delete_team( _id ) {
+    let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.delete(`${this.URI}/teams/${_id}`, options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+  }
 }

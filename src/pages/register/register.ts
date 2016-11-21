@@ -4,7 +4,6 @@ import { NavController,
 import { RegisterService }    from './register-service'
 import { FormBuilder,
          FormGroup,
-         FormControl,
          Validators }         from '@angular/forms';
 import { Login }              from '../login/login';
 
@@ -14,16 +13,16 @@ import { Login }              from '../login/login';
 })
 
 export class Register implements OnInit {
-  private clubs         : Array<Object> = [];
-  private selectedClub  : Object = null;
-  private submitted     : boolean;
-  private registerForm  : FormGroup;
+  public clubs         : Array<Object> = [];
+  public selectedClub  : Object = null;
+  public submitted     : boolean;
+  public registerForm = null;
 
   constructor (
-    private navController: NavController,
-    private registerService: RegisterService,
-    private formBuilder: FormBuilder,
-    private alertCtrl: AlertController ) {
+    public navController: NavController,
+    public registerService: RegisterService,
+    public formBuilder: FormBuilder,
+    public alertCtrl: AlertController ) {
       this.registerService.get_clubs().then(
           res => this.clubs = res,
           error => console.log(error)
@@ -51,7 +50,7 @@ export class Register implements OnInit {
             } else {
               console.info('Acounte created');
               this.navController.push( Login, {
-                email : value.email
+                "email" : value.email
               });
             }
           },

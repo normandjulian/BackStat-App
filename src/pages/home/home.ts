@@ -1,12 +1,9 @@
-import { Component, Input }         from '@angular/core';
+import { Component }         from '@angular/core';
 import { NavController, Platform, LoadingController, AlertController }  from 'ionic-angular';
-import { StatsPage }                from "../stats/stats";
-import { Login }                from "../login/login";
-import { Game }                     from '../../classes/game.int'
-import { TeamInt }                     from '../../classes/team-class'
-import { Observable }               from 'rxjs/Observable';
+// import { StatsPage }                from "../stats/stats";
+import { Game }                     from '../../classes/game-class'
+import { Team }                     from '../../classes/team-class'
 // import { BackstatSrv }              from '../../providers/backstat/backstat';
-import { Team }                 from '../team/team'
 import { GamePage }                 from '../game/game'
 
 @Component({
@@ -14,17 +11,17 @@ import { GamePage }                 from '../game/game'
 })
 
 export class HomePage {
-  public selected_team  : TeamInt;
+  public selected_team  : Team;
   public selected_game  : Game;
   public games : Game[] = [];
-  public teams : TeamInt[] = [];
+  public teams : Team[] = [];
 
   constructor (
-    private platform : Platform,
-    private navController : NavController,
-    // private backstatSrv : BackstatSrv,
-    private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController ) {
+    public platform : Platform,
+    public navController : NavController,
+    // public backstatSrv : BackstatSrv,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController ) {
 
       platform.ready().then(() => {
         // this.backstatSrv.get_teams()
@@ -138,7 +135,7 @@ export class HomePage {
 
   goto_stat () {
     if ( !!this.selected_game ) {
-      this.navController.push( StatsPage );
+      // this.navController.push( StatsPage );
     }
   }
 }

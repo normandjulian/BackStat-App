@@ -5,9 +5,9 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class RegisterService {
   // private URI     : string = "http://149.202.129.70/api";
-  private URI     : string = "http://127.0.0.1:3000/api";
-  private headers : Object = { 'Content-Type': 'application/json' }
-  constructor(private http: Http) { }
+  public URI     : string = "http://127.0.0.1:3000/api";
+  public headers : Object = { 'Content-Type': 'application/json' }
+  constructor(public http: Http) { }
 
   get_clubs () : any { //++++++++++++++++++++++++++++++++++++++++++++++++++++++> Get Clubs
     let headers = new Headers( this.headers );

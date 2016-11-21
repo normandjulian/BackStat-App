@@ -5,25 +5,26 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label stacked>Equipe adverse</ion-label>
-      <ion-input [(ngModel)]="game_opponent" type="text" placeholder="Guerrier du Pont en Or"></ion-input>
-    </ion-item>
+<ion-content padding scroll="false">
+  <form [formGroup]="gameForm" novalidate (ngSubmit)="save_game( gameForm.value )">
+    <ion-list>
 
-    <ion-item>
-      <ion-label stacked>Date du match</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DDDD MMMM YYYY" min="2016" [(ngModel)]="game_date" placeholder="12/11/2017"></ion-datetime>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>Les adversaires</ion-label>
+        <ion-input type="text" placeholder="Cadets 1" formControlName=opponent></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Match à domicile ?</ion-label>
-      <ion-checkbox [(ngModel)]="game_home"></ion-checkbox>
-    </ion-item>
-  </ion-list>
+      <ion-item>
+        <ion-label stacked>Date</ion-label>
+        <ion-input type="text" placeholder="Steve Kerr" formControlName=date></ion-input>
+      </ion-item>
 
-  <button class="button button-full button-positive" (click)="save_game();">
-    Créer un match
-  </button>
+      <ion-item>
+        <ion-label stacked>Match à domicile ?</ion-label>
+        <ion-input type="text" placeholder="Steve Kerr" formControlName=home></ion-input>
+      </ion-item>
+
+      <button type="submit" [disabled]="!gameForm.valid" ion-button full color="tango">{{fields.bSaveGame}}</button>
+    </ion-list>
+  </form>
 </ion-content>
