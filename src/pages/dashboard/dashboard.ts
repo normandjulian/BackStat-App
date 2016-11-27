@@ -4,7 +4,9 @@ import { NavController,
          AlertController,
          Platform }         from 'ionic-angular';
 import { DashboardService } from './dashboard-service';
+
 import { Team }             from '../../classes/team-class';
+import { Game }             from '../../classes/game-class';
 
 import { TeamPage }         from '../team/team';
 import { GamePage }         from '../game/game';
@@ -17,8 +19,9 @@ import { GamePage }         from '../game/game';
 
 export class DashboardPage implements OnInit {
   public teams: Team[] = null;
-  public games;
+  public games: Game[] = null;
   public selected_team: Team = null;
+  public selected_game: Game = null;
 
   constructor(
     public navController: NavController,
@@ -58,6 +61,22 @@ export class DashboardPage implements OnInit {
       this.selected_team = null;
     } else {
       this.selected_team = _team;
+      this.dashboardService.get_games( this.selected_team._id ).subscribe(
+        res => this.games = res,
+        err => console.error(err)
+      )
+    }
+  }
+
+  /**
+   * Store the game selected by the user
+   * @param  {Game}   _game [description]
+   */
+  select_game ( _game: Game ) {
+    if (( this.selected_game === _game ) || ( _game === null )) {
+      this.selected_game = null;
+    } else {
+      this.selected_game = _game;
     }
   }
 
@@ -65,8 +84,10 @@ export class DashboardPage implements OnInit {
     if ( this.selected_team === null ) {
       this.notification('Création impossible', 'Il faut séléctionner une équipe', 'Got it', () => {});
     } else {
-      let id = ( typeof _id !== 'undefined' ) ? _id : null;
-      this.navController.push( GamePage, { _id: id } );
+      this.navController.push( GamePage, {
+        'team_id': this.selected_team._id,
+        'game_id': this.selected_game ? this.selected_game._id : null
+      });
     }
   }
 

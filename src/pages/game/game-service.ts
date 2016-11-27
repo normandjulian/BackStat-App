@@ -16,31 +16,29 @@ export class GameService {
   public headers : Object = { 'Content-Type': 'application/json' }
   constructor( public http: Http ) { }
 
-  create_game ( game ): Observable<Object> {
-    let body = { name: game.name, coach: game.coach || null }
+  create_game ( game: Game ): Observable<Game> {
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(`${this.URI}/games`, body, options)
+    return this.http.post(`${this.URI}/games`, game, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  update_game ( _game, _id ): Observable<Game> {
-    let body = { name: _game.name, coach: _game.coach || null }
+  update_game ( _game: Game): Observable<Game> {
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.put(`${this.URI}/games/${_id}`, body, options)
+    return this.http.put(`${this.URI}/games/${_game._id}`, _game, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  get_game ( _game_id ): Observable<Game> {
+  get_game ( _game_id: String ): Observable<Game> {
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(`${this.URI}/games/${_game_id}/players`, options)
+    return this.http.get(`${this.URI}/games/${_game_id}`, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

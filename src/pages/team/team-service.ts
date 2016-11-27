@@ -54,4 +54,18 @@ export class TeamService {
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  /**
+   * Update the player with its new datas
+   * @param  {Player}             _player [description]
+   * @return {Observable<Player>}         [description]
+   */
+  update_player ( _player: Player ): Observable<Player> {
+    let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(`${this.URI}/players/${_player._id}`, _player, options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }

@@ -38,6 +38,10 @@ export class TeamPage {
     public formBuilder: FormBuilder,
     public teamService: TeamService) {}
 
+  /**
+   * Save (update or create) the current team
+   * @param  {[Object]} value [description]
+   */
   save_team ( value ) {
     if ( this.team['_id'] ) {
       this.teamService.update_team( value, this.team._id ).subscribe(
@@ -52,8 +56,8 @@ export class TeamPage {
     }
   }
 
-  get_team ( _team_id ) {
-    this.teamService.get_team( _team_id ).subscribe(
+  get_team ( _id ) {
+    this.teamService.get_team( _id ).subscribe(
       res => this.initFields( res ),
       err => console.error( err )
     )
@@ -77,15 +81,26 @@ export class TeamPage {
     }
   }
 
-  update_team ( _name, _coach ) { }
-
-  create_team ( _name, _coach ) { }
-
-  save_player ( value ) {
+  /**
+   * Save the current player (create or update)
+   * @param  {Player} _value [Data send by form]
+   */
+  save_player ( _value : Player ) {
     if ( this.selected_player ) { // ++++++++++++++++++> Update player
-
+      let player = _value;
+      player._id = this.selected_player._id;
+      this.teamService.update_player( player ).subscribe(
+        res => {
+          for (let key in this.team.players ) {
+            if (res._id === this.team.players[key]['_id']) {
+              this.team.players[key] = res;
+            }
+          }
+        },
+        err => console.error(err)
+      )
     } else { // ++++++++++++++++++> Create player
-      let player = value;
+      let player = _value;
       player.team_id = this.team._id;
       this.teamService.create_player( player ).subscribe(
         res => {
@@ -148,5 +163,5 @@ export class TeamPage {
     } else {
       this.initFields( null );
     }
-  }
+  };
 }

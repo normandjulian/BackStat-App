@@ -4,7 +4,8 @@ import { Http,
          RequestOptions,
          Response }         from '@angular/http';
 import { Observable }       from 'rxjs/Rx';
-import { Team }          from '../../classes/team-class';
+import { Team }             from '../../classes/team-class';
+import { Game }             from '../../classes/game-class';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -25,12 +26,21 @@ export class DashboardService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
   }
 
-  delete_team( _id ) {
+  delete_team( _id: String ) {
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
     return this.http.delete(`${this.URI}/teams/${_id}`, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+  }
+
+  get_games( team_id: String) : Observable<Game[]> {
+    let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(`${this.URI}/teams/${team_id}/games`, options)
+    .map((res: Response) => res.json())
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
   }
 }

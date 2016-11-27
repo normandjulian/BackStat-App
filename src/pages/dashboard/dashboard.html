@@ -41,6 +41,20 @@
           </h1>
         </div> <!-- header -->
 
+        <ion-card *ngFor="let game of games" (tap)="select_game(game)" [class.selected]="game === selected_game">
+          <ion-card-header>
+            {{game.opponent}}
+          </ion-card-header>
+          <ion-card-content>
+            <button ion-button icon-only clear (tap)="manage_game(game._id)">
+              <ion-icon name="eye"></ion-icon>
+            </button>
+            <button ion-button icon-only clear (tap)="delete_game(game._id)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-card-content>
+        </ion-card>
+
       </ion-col>
     </ion-row>
   </ion-grid>

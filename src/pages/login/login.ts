@@ -17,7 +17,10 @@ import { Guest }              from '../../classes/guest-class';
 export class Login implements OnInit {
   public user: any;
   public isLogged: Boolean = false;
-  public guest: Guest = null;
+  public guest: Guest = {
+    email: null,
+    password: null
+  };
 
   constructor (
     public platform: Platform,

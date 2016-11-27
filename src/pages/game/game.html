@@ -14,14 +14,14 @@
         <ion-input type="text" placeholder="Cadets 1" formControlName=opponent></ion-input>
       </ion-item>
 
-      <ion-item>
-        <ion-label stacked>Date</ion-label>
-        <ion-input type="text" placeholder="Steve Kerr" formControlName=date></ion-input>
+      <ion-item stacked>
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" formControlName=date></ion-datetime>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Match à domicile ?</ion-label>
-        <ion-input type="text" placeholder="Steve Kerr" formControlName=home></ion-input>
+          <ion-label>Match à domicile ?</ion-label>
+          <ion-toggle formControlName=home></ion-toggle>
       </ion-item>
 
       <button type="submit" [disabled]="!gameForm.valid" ion-button full color="tango">{{fields.bSaveGame}}</button>
