@@ -2,7 +2,7 @@ import { Component }         from '@angular/core';
 import { NavController, Platform, LoadingController, AlertController }  from 'ionic-angular';
 // import { StatsPage }                from "../stats/stats";
 import { Game }                     from '../../classes/game-class'
-import { Team }                     from '../../classes/team-class'
+import { Team }                     from '../../classes/team.class'
 // import { BackstatSrv }              from '../../providers/backstat/backstat';
 import { GamePage }                 from '../game/game'
 

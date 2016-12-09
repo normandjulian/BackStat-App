@@ -4,43 +4,45 @@ import { Http,
          RequestOptions,
          Response }         from '@angular/http';
 import { Observable }       from 'rxjs/Rx';
-import { Team }             from '../../classes/team.class';
-import { Game }             from '../../classes/game-class';
+import { Stat }             from '../../classes/stat-class';
+import { Player }           from '../../classes/player-class';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class DashboardService {
+export class StatService {
   public URI     : string = "http://127.0.0.1:3000/api";
   public headers : Object = { 'Content-Type': 'application/json' }
   constructor( public http: Http ) { }
 
-  get_teams() : Observable<Team[]> {
+  // TODO
+  create_stat ( stat: Stat ): Observable<Stat> {
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(`${this.URI}/teams`, options)
+    return this.http.post(`${this.URI}/stats`, stat, options)
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  delete_team( _id: String ) {
+  // TO REMOVE ?
+  update_stat ( _stat: Stat): Observable<Stat> {
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.delete(`${this.URI}/teams/${_id}`, options)
+    return this.http.put(`${this.URI}/stats/${_stat._id}`, _stat, options)
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  get_games( team_id: String) : Observable<Game[]> {
+  get_players ( _team_id: String ): Observable<Player[]> {
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(`${this.URI}/teams/${team_id}/games`, options)
-    .map((res: Response) => res.json())
-    .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+    return this.http.get(`${this.URI}/team/${_team_id}/players`, options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 }

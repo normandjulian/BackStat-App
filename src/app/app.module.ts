@@ -9,22 +9,24 @@ import { HttpModule }           from '@angular/http';
 
 // pages
 import { HomePage }             from '../pages/home/home';
-import { DashboardPage }            from '../pages/dashboard/dashboard';
+import { DashboardPage }        from '../pages/dashboard/dashboard';
 import { TimerComponent }       from '../pages/timer/timer';
 import { Login }                from '../pages/login/login';
-import { Register }             from '../pages/register/register';
+import { RegisterPage }         from '../pages/register/register';
 import { TeamPage }             from '../pages/team/team';
 import { GamePage }             from '../pages/game/game';
+import { StatPage }             from '../pages/stat/stat';
 
 @NgModule({
   declarations: [
     MyApp,
     Login,
-    Register,
+    RegisterPage,
     HomePage,
     DashboardPage,
     TeamPage,
     GamePage,
+    StatPage,
     TimerComponent
   ],
   imports: [
@@ -37,11 +39,12 @@ import { GamePage }             from '../pages/game/game';
   entryComponents: [
     MyApp,
     Login,
-    Register,
+    RegisterPage,
     HomePage,
     DashboardPage,
     TeamPage,
     GamePage,
+    StatPage,
     TimerComponent
   ],
   providers: [

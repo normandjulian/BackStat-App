@@ -3,7 +3,6 @@ import { NavController,
          AlertController }    from 'ionic-angular';
 import { RegisterService }    from './register-service'
 import { FormBuilder,
-         FormGroup,
          Validators }         from '@angular/forms';
 import { Login }              from '../login/login';
 
@@ -12,7 +11,7 @@ import { Login }              from '../login/login';
   providers: [ RegisterService ]
 })
 
-export class Register implements OnInit {
+export class RegisterPage implements OnInit {
   public clubs         : Array<Object> = [];
   public selectedClub  : Object = null;
   public submitted     : boolean;
@@ -22,23 +21,7 @@ export class Register implements OnInit {
     public navController: NavController,
     public registerService: RegisterService,
     public formBuilder: FormBuilder,
-    public alertCtrl: AlertController ) {
-      this.registerService.get_clubs().then(
-          res => this.clubs = res,
-          error => console.log(error)
-        )
-    };
-
-  ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-        email     : ['', [<any>Validators.required]],
-        lastname  : ['', [<any>Validators.required]],
-        firstname : ['', [<any>Validators.required]],
-        fstpwd    : ['', [<any>Validators.required]],
-        scdpwd    : ['', [<any>Validators.required]],
-        club      : ['', [<any>Validators.required]]
-    });
-  }
+    public alertCtrl: AlertController ) { };
 
   sign_up (value, isValid) {
     if ( this.validatePassword(value.fstpwd, value.scdpwd) ) {
@@ -74,5 +57,21 @@ export class Register implements OnInit {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  ngOnInit() {
+    this.registerService.get_clubs().then(
+        res => this.clubs = res,
+        error => console.log(error)
+      );
+
+    this.registerForm = this.formBuilder.group({
+        email     : ['', [<any>Validators.required]],
+        lastname  : ['', [<any>Validators.required]],
+        firstname : ['', [<any>Validators.required]],
+        fstpwd    : ['', [<any>Validators.required]],
+        scdpwd    : ['', [<any>Validators.required]],
+        club      : ['', [<any>Validators.required]]
+    });
   }
 }

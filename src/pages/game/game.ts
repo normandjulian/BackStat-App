@@ -3,9 +3,10 @@ import { Component,
 import { NavController,
          NavParams }      from 'ionic-angular';
 import { FormBuilder,
-         FormGroup,
          Validators }     from '@angular/forms';
+
 import { Game }           from '../../classes/game-class'
+
 import { GameService }    from './game-service';
 
 @Component({

@@ -1,36 +1,37 @@
 <ion-header>
 
   <!-- <ion-navbar>
-    <ion-title>Se connecter</ion-title>
-  </ion-navbar> -->
+  <ion-title>Se connecter</ion-title>
+</ion-navbar> -->
 </ion-header>
 
 <ion-content padding>
   <div class="logo">
     <img src="assets/images/backstat.png" alt="">
   </div>
+  <form [formGroup]="loginForm" novalidate (ngSubmit)="sign_in(loginForm.value)">
+    <ion-list>
+      <ion-item class="no-border">
+        <ion-label>E-mail
+          <input type="text" placeholder="Julian" formControlName=email>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mot de passe
+          <input type="password" placeholder="P@ssword" formControlName=password>
+        </ion-label>
+      </ion-item>
 
-  <ion-list>
-    <ion-item class="no-border">
-      <ion-label>E-mail
-        <input [(ngModel)]="guest.email" type="text" placeholder="Julian">
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Mot de passe
-        <input [(ngModel)]="guest.password" type="password" placeholder="P@ssword">
-      </ion-label>
-    </ion-item>
+      <button type="submit" [disabled]="!loginForm.valid" ion-button full color="tango">Me connecter</button>
 
-    <button ion-button full color="tango" (tap)="sign_in();">Me connecter</button>
+      <ion-item class="reverse">
+        <ion-label>Se souvenir de moi ?</ion-label>
+        <ion-checkbox checked="true" (tap)="save_credits()"></ion-checkbox>
+      </ion-item>
 
-    <ion-item class="reverse">
-      <ion-label>Se souvenir de moi ?</ion-label>
-      <ion-checkbox checked="true" (tap)="save_credits()"></ion-checkbox>
-    </ion-item>
-
-    <ion-item class="reverse">
-      <h3 (tap)="goto_signup();">Pas enore de compte ? Inscrivez-vous !</h3>
-    </ion-item>
-  </ion-list>
+      <ion-item class="reverse">
+        <h3 (tap)="goto_signup();">Pas enore de compte ? Inscrivez-vous !</h3>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

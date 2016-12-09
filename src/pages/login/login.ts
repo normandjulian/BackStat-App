@@ -1,12 +1,11 @@
-import { Component, OnInit}   from '@angular/core';
-import { NavController,
-  Platform,
-  AlertController,
-  NavParams }                 from 'ionic-angular';
-import { Register }           from '../register/register';
-import { DashboardPage }      from '../dashboard/dashboard';
-import { LoginService }       from './login-service'
-import { Guest }              from '../../classes/guest-class';
+import { Component, OnInit} from '@angular/core';
+import { NavController, AlertController, NavParams } from 'ionic-angular';
+import { FormBuilder, Validators } from '@angular/forms';
+
+import { RegisterPage } from '../register/register';
+import { DashboardPage } from '../dashboard/dashboard';
+import { LoginService } from './login-service'
+import { Guest } from '../../classes/guest-class';
 
 @Component({
   selector: 'page-login',
@@ -17,23 +16,14 @@ import { Guest }              from '../../classes/guest-class';
 export class Login implements OnInit {
   public user: any;
   public isLogged: Boolean = false;
-  public guest: Guest = {
-    email: null,
-    password: null
-  };
+  public loginForm = null;
 
   constructor (
-    public platform: Platform,
     public navController: NavController,
     public loginService: LoginService,
     public alertCtrl: AlertController,
-    public navParams: NavParams ) {
-
-      platform.ready().then(() => {
-        this.guest = { email : 'normandjulian@gmail.com', password: 'julian'};
-        this.sign_in();
-      });
-  }
+    public formBuilder: FormBuilder,
+    public navParams: NavParams ) { }
 
   notification ( _message ) {
     let alert = this.alertCtrl.create({
@@ -44,25 +34,23 @@ export class Login implements OnInit {
     alert.present();
   }
 
-  sign_in ( ) {
-    if ((!!this.guest.email) || (!!this.guest.password)) {
-      this.loginService.sign_in({ email: this.guest.email, password: this.guest.password })
-        .subscribe(
-          res => {
-            if ( res['error'] ) {
-              this.notification(res['message']);
-            } else {
-              localStorage.setItem('user', JSON.stringify(res));
-              this.navController.push( DashboardPage );
-            }
-          },
-          err => console.error( err )
-        );
-    }
+  sign_in ( value : any ) {
+    this.loginService.sign_in({ email: value.email, password: value.password })
+      .subscribe(
+        res => {
+          if ( res['error'] ) {
+            this.notification(res['message']);
+          } else {
+            localStorage.setItem('user', JSON.stringify(res));
+            this.navController.push( DashboardPage );
+          }
+        },
+        err => console.error( err )
+      );
   }
 
   goto_signup () {
-    this.navController.push( Register );
+    this.navController.push( RegisterPage );
   }
 
   save_credits () {
@@ -70,9 +58,20 @@ export class Login implements OnInit {
     console.log('TODO');
   }
 
+  /**
+   * Initialisation of the page
+   */
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+        email     : ['', [<any>Validators.required]],
+        password  : ['', [<any>Validators.required]]
+    });
+    this.sign_in({ email : 'normandjulian@gmail.com', password: 'julian'});
+
     if ( typeof this.navParams.get('email') !== 'undefined' ) {
-      this.guest['email'] = this.navParams.get('email')
+      this.loginForm.setValue({
+        email : this.navParams.get('email')
+      });
     }
   }
 }

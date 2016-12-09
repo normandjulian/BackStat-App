@@ -4,7 +4,6 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Login } from '../pages/login/login';
 
-
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })

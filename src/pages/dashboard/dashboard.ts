@@ -5,11 +5,12 @@ import { NavController,
          Platform }         from 'ionic-angular';
 import { DashboardService } from './dashboard-service';
 
-import { Team }             from '../../classes/team-class';
+import { Team }             from '../../classes/team.class';
 import { Game }             from '../../classes/game-class';
 
 import { TeamPage }         from '../team/team';
 import { GamePage }         from '../game/game';
+import { StatPage }         from '../stat/stat';
 
 @Component({
   selector: 'page-dashboard',
@@ -28,13 +29,6 @@ export class DashboardPage implements OnInit {
     public dashboardService: DashboardService,
     public alertCtrl: AlertController,
     public platform : Platform ) { }
-
-  ngOnInit () {
-    this.dashboardService.get_teams().subscribe(
-      res => this.teams = res,
-      err => console.error( err )
-    )
-  };
 
   manage_team ( _id ) {
     let id = ( typeof _id !== 'undefined' ) ? _id : null;
@@ -62,7 +56,10 @@ export class DashboardPage implements OnInit {
     } else {
       this.selected_team = _team;
       this.dashboardService.get_games( this.selected_team._id ).subscribe(
-        res => this.games = res,
+        res => {
+          this.games = res
+          this.select_game( this.games[0] )
+        },
         err => console.error(err)
       )
     }
@@ -106,4 +103,18 @@ export class DashboardPage implements OnInit {
       ]
     }).present();
   }
+
+  goto_stat () {
+    this.navController.push( StatPage, {});
+  }
+
+  ngOnInit () {
+    this.dashboardService.get_teams().subscribe(
+      res => {
+        this.teams = res;
+        this.select_team( this.teams[0] );
+      },
+      err => console.error( err )
+    )
+  };
 }
