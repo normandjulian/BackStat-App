@@ -54,7 +54,7 @@ export class TimerComponent implements OnInit {
     }
 
     ngOnInit () : void {
-        this.seconds = 180;
+        // this.seconds = 180;
         this.format();
     }
 

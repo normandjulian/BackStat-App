@@ -105,7 +105,10 @@ export class DashboardPage implements OnInit {
   }
 
   goto_stat () {
-    this.navController.push( StatPage, {});
+    this.navController.push( StatPage, {
+      team_id: this.selected_team._id,
+      game_id: this.selected_game._id
+    });
   }
 
   ngOnInit () {

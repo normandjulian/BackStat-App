@@ -117,12 +117,11 @@
           <li><img (tap)="tapOnAction('to')" src="../assets/images/to.png"></li>
         </ul>
         <ul [hidden]="selectPlayer" class="circle-player">
-          <li *ngFor="let player of players"><img (tap)="tapOnPlayer(player._id);" src="build/images/jersey/_{{player.number}}-tee-shirt.svg"></li>
+          <li *ngFor="let player of players"><img (tap)="tapOnPlayer(player._id);" src="../assets/images/jersey/_{{player.number}}-tee-shirt.svg"></li>
         </ul>
       </ion-col>
       <ion-col width-20>
-        bite
-        <!--<timer [seconds]="timerSeconds" (timeChange)="getTime($event);"></timer>-->
+        <timer [seconds]="timerSeconds" (timeChange)="getTime($event);"></timer>
       </ion-col>
     </ion-row>
   </ion-grid>

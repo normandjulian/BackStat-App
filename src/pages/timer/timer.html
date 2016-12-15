@@ -1,9 +1,9 @@
-<button full (click)="start()" [hidden]="bStart">
+<button ion-button icon-only full (tap)="start()" [hidden]="bStart">
   <ion-icon name="play"></ion-icon>{{time}}
 </button>
-<button full (click)="stop()" [hidden]="bStop">
+<button ion-button icon-only full (tap)="stop()" [hidden]="bStop">
   <ion-icon name="pause"></ion-icon>{{time}}
 </button>
-<button full (click)="resume()" [hidden]="bResume">
+<button ion-button icon-only full (tap)="resume()" [hidden]="bResume">
   <ion-icon name="play"></ion-icon>{{time}}
 </button>

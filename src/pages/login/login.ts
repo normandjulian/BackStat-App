@@ -5,7 +5,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { RegisterPage } from '../register/register';
 import { DashboardPage } from '../dashboard/dashboard';
 import { LoginService } from './login-service'
-import { Guest } from '../../classes/guest-class';
 
 @Component({
   selector: 'page-login',
@@ -13,7 +12,7 @@ import { Guest } from '../../classes/guest-class';
   providers: [ LoginService ]
 })
 
-export class Login implements OnInit {
+export class LoginPage implements OnInit {
   public user: any;
   public isLogged: Boolean = false;
   public loginForm = null;

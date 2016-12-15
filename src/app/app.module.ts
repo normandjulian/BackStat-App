@@ -11,7 +11,7 @@ import { HttpModule }           from '@angular/http';
 import { HomePage }             from '../pages/home/home';
 import { DashboardPage }        from '../pages/dashboard/dashboard';
 import { TimerComponent }       from '../pages/timer/timer';
-import { Login }                from '../pages/login/login';
+import { LoginPage }                from '../pages/login/login';
 import { RegisterPage }         from '../pages/register/register';
 import { TeamPage }             from '../pages/team/team';
 import { GamePage }             from '../pages/game/game';
@@ -20,7 +20,7 @@ import { StatPage }             from '../pages/stat/stat';
 @NgModule({
   declarations: [
     MyApp,
-    Login,
+    LoginPage,
     RegisterPage,
     HomePage,
     DashboardPage,
@@ -38,7 +38,7 @@ import { StatPage }             from '../pages/stat/stat';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Login,
+    LoginPage,
     RegisterPage,
     HomePage,
     DashboardPage,

@@ -7,7 +7,7 @@ import { FormBuilder,
          Validators }     from '@angular/forms';
 import { TeamService }    from './team-service';
 import { TeamFull }       from '../../classes/team-full.class'
-import { Player }         from '../../classes/player-class'
+import { Player }         from '../../classes/player.class'
 
 @Component({
   selector: 'page-team',

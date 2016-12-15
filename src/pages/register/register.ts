@@ -1,10 +1,9 @@
-import { Component, OnInit }  from '@angular/core';
-import { NavController,
-         AlertController }    from 'ionic-angular';
-import { RegisterService }    from './register-service'
-import { FormBuilder,
-         Validators }         from '@angular/forms';
-import { Login }              from '../login/login';
+import { Component, OnInit } from '@angular/core';
+import { NavController, AlertController } from 'ionic-angular';
+import { FormBuilder, Validators } from '@angular/forms';
+
+import { RegisterService } from './register-service'
+import { LoginPage } from '../login/login';
 
 @Component({
   templateUrl: 'register.html',
@@ -32,7 +31,7 @@ export class RegisterPage implements OnInit {
               console.warn(res['message']);
             } else {
               console.info('Acounte created');
-              this.navController.push( Login, {
+              this.navController.push( LoginPage, {
                 "email" : value.email
               });
             }

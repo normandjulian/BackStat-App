@@ -4,8 +4,8 @@ import { NavController,
 // import { TimerComponent }       from '../timer/timer';
 
 import { StatService }          from './stat-service';
-import { Stat }                 from '../../classes/stat-class';
-import { Player }               from '../../classes/player-class';
+import { Stat }                 from '../../classes/stat.class';
+import { Player }               from '../../classes/player.class';
 //
 @Component({
   selector: 'page-stat',
@@ -14,14 +14,20 @@ import { Player }               from '../../classes/player-class';
 })
 
 export class StatPage implements OnInit {
-  public stat         : Stat          = null;
+  public stat         : Stat          = {
+    _id: null,
+    area: null,
+    time: null,
+    action: null,
+    player_id: null,
+    game_id: null,
+    team_id: null
+  };
   public selectAction : boolean       = true;
   public selectPlayer : boolean       = true;
   public players      : Player[]      = null;
   public time         : string;
-  public game_id      : string;
-  public team_id      : string;
-
+  public timerSeconds : number = 330;
   constructor (
     public navController: NavController,
     public navParams: NavParams,
@@ -32,42 +38,53 @@ export class StatPage implements OnInit {
    * Get back the time
    * @param  {_time} value [the time of the game]
    */
-  getTime ( _time : string ) {
-    this.time = _time;
+  getTime ( time : string ) {
+    this.time = time;
+    console.log(time)
   }
 
   /**
-   * Catch the tap on the court and set the this.stat
+   * Set the area of the
    * @param {number} _area [the area clicked]
    */
-  tapOnCourt ( _area: number ) : void {
-    this.stat.area = _area;
-    this.stat['time'] = this.time;
+  tapOnCourt ( area: number ) : void {
+    this.stat.area = area;
+    this.stat.time = this.time;
     this.selectAction = false;
   }
 
+  /**
+   * Set the action of the stat
+   * @param {string} action [the action selected]
+   */
   tapOnAction ( action: string ) : void {
     this.stat['action'] = action;
     this.selectAction = true;
     this.selectPlayer = false;
+    console.log(this.players);
   }
 
-  tapOnPlayer ( _player_id: string ) : void {
-    this.stat['player_id'] = _player_id;
+  tapOnPlayer ( player_id: string ) : void {
+    this.stat['player_id'] = player_id;
     this.selectPlayer = true;
-    // this.backstatSrv.create_stat( this.stat )
-    //   .then( res => console.log( res ));
+    console.log(this.stat);
+    // this.statService.create_stat( this.stat ).subscribe(
+    //   res => console.log( res ),
+    //   err => console.log( err )
+    // );
   }
 
   set_up() {
-    this.statService.get_players( this.team_id ).subscribe(
+    this.statService.get_players( this.stat.team_id ).subscribe(
       res => this.players = res,
       err => console.log(err)
     )
   }
 
   ngOnInit() {
-    this.game_id = this.navParams.get('game_id');
-    this.team_id = this.navParams.get('team_id');
+    this.stat.game_id = this.navParams.get('game_id');
+    this.stat.team_id = this.navParams.get('team_id');
+    console.log(this.stat);
+    this.set_up();
   }
 }

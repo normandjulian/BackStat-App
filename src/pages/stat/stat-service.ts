@@ -4,8 +4,8 @@ import { Http,
          RequestOptions,
          Response }         from '@angular/http';
 import { Observable }       from 'rxjs/Rx';
-import { Stat }             from '../../classes/stat-class';
-import { Player }           from '../../classes/player-class';
+import { Stat }             from '../../classes/stat.class';
+import { Player }           from '../../classes/player.class';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -41,7 +41,7 @@ export class StatService {
     let headers = new Headers({ 'x-access-token': JSON.parse(localStorage.getItem('user')).token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(`${this.URI}/team/${_team_id}/players`, options)
+    return this.http.get(`${this.URI}/teams/${_team_id}/players`, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
