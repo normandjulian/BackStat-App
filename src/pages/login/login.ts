@@ -65,12 +65,12 @@ export class LoginPage implements OnInit {
         email     : ['', [<any>Validators.required]],
         password  : ['', [<any>Validators.required]]
     });
-    this.sign_in({ email : 'normandjulian@gmail.com', password: 'julian'});
+    this.sign_in({ email : 'maelle.skwara@gmail.com', password: 'maelle'});
 
-    if ( typeof this.navParams.get('email') !== 'undefined' ) {
-      this.loginForm.setValue({
-        email : this.navParams.get('email')
-      });
-    }
+    // if ( typeof this.navParams.get('email') !== 'undefined' ) {
+    //   this.loginForm.setValue({
+    //     email : this.navParams.get('email')
+    //   });
+    // }
   }
 }

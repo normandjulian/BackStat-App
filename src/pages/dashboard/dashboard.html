@@ -52,7 +52,7 @@
             <button [hidden]="game !== selected_game" ion-button icon-only clear (tap)="delete_game(game._id)">
               <ion-icon name="trash"></ion-icon>
             </button>
-            <button [hidden]="game !== selected_game" ion-button icon-only clear (tap)="goto_stat()">
+            <button [hidden]="game !== selected_game" ion-button icon-only clear (tap)="goto_stat(game._id)">
               <ion-icon name="basketball"></ion-icon>
             </button>
           </ion-card-content>

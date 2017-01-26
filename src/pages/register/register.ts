@@ -31,9 +31,7 @@ export class RegisterPage implements OnInit {
               console.warn(res['message']);
             } else {
               console.info('Acounte created');
-              this.navController.push( LoginPage, {
-                "email" : value.email
-              });
+              this.navController.push( LoginPage );
             }
           },
           error => {

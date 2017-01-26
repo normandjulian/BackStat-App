@@ -2,6 +2,7 @@ import { Component, OnInit }    from '@angular/core';
 import { NavController,
          NavParams }            from 'ionic-angular';
 // import { TimerComponent }       from '../timer/timer';
+import { MenuController } from 'ionic-angular';
 
 import { StatService }          from './stat-service';
 import { Stat }                 from '../../classes/stat.class';
@@ -31,9 +32,14 @@ export class StatPage implements OnInit {
   constructor (
     public navController: NavController,
     public navParams: NavParams,
-    public statService: StatService) {
+    public statService: StatService,
+    public menuCtrl: MenuController) {
   }
 
+
+  openMenu() {
+   this.menuCtrl.open();
+  }
   /**
    * Get back the time
    * @param  {_time} value [the time of the game]

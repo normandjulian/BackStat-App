@@ -1,8 +1,16 @@
+
 <ion-header>
   <ion-navbar>
     <ion-title>stats</ion-title>
   </ion-navbar>
 </ion-header>
+<ion-menu [content]="mycontent">
+<ion-content>
+  <ion-list>
+  ...
+  </ion-list>
+</ion-content>
+</ion-menu>
 <ion-content padding>
   <ion-grid>
     <ion-row>
@@ -122,6 +130,9 @@
       </ion-col>
       <ion-col width-20>
         <timer [seconds]="timerSeconds" (timeChange)="getTime($event);"></timer>
+        <button ion-button icon-only full (tap)="openMenu()">
+          <ion-icon name="play"></ion-icon>{{time}}
+        </button>
       </ion-col>
     </ion-row>
   </ion-grid>

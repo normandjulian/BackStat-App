@@ -78,6 +78,7 @@ export class DashboardPage implements OnInit {
   }
 
   manage_game ( _id ) {
+    console.log(_id)
     if ( this.selected_team === null ) {
       this.notification('Création impossible', 'Il faut séléctionner une équipe', 'Got it', () => {});
     } else {
@@ -104,10 +105,10 @@ export class DashboardPage implements OnInit {
     }).present();
   }
 
-  goto_stat () {
+  goto_stat ( _id ) {
     this.navController.push( StatPage, {
       team_id: this.selected_team._id,
-      game_id: this.selected_game._id
+      game_id: _id
     });
   }
 
@@ -115,7 +116,10 @@ export class DashboardPage implements OnInit {
     this.dashboardService.get_teams().subscribe(
       res => {
         this.teams = res;
-        this.select_team( this.teams[0] );
+        if (this.teams.length > 0) {
+          this.select_team( this.teams[0] );
+
+        }
       },
       err => console.error( err )
     )

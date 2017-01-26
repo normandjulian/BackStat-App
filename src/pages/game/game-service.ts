@@ -12,7 +12,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class GameService {
-  public URI     : string = "http://127.0.0.1:3000/api";
+  public URI     : string = "http://127.0.0.1:8080";
   public headers : Object = { 'Content-Type': 'application/json' }
   constructor( public http: Http ) { }
 
