@@ -6,7 +6,7 @@ import { NavController,
 import { DashboardService } from './dashboard-service';
 
 import { Team }             from '../../classes/team.class';
-import { Game }             from '../../classes/game-class';
+import { Game }             from '../../classes/game.class';
 
 import { TeamPage }         from '../team/team';
 import { GamePage }         from '../game/game';
@@ -30,6 +30,7 @@ export class DashboardPage implements OnInit {
     public alertCtrl: AlertController,
     public platform : Platform ) { }
 
+  
   manage_team ( _id ) {
     let id = ( typeof _id !== 'undefined' ) ? _id : null;
     this.navController.push( TeamPage, { _id: id } );

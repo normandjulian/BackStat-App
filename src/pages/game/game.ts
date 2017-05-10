@@ -5,7 +5,7 @@ import { NavController,
 import { FormBuilder,
          Validators }     from '@angular/forms';
 
-import { Game }           from '../../classes/game-class'
+import { Game }           from '../../classes/game.class'
 
 import { GameService }    from './game-service';
 

@@ -1,11 +1,18 @@
 {
-  "rules": {
-    "no-duplicate-variable": true,
-    "no-unused-variable": [
-      true
-    ]
-  },
   "rulesDirectory": [
     "node_modules/tslint-eslint-rules/dist/rules"
-  ]
+  ],
+  "rules": {
+    "no-duplicate-variable": true,
+    "no-unused-variable": [true],
+    "max-line-length": [120],
+    "new-parens": true,
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-conditional-assignment": true,
+    "no-console":["debug", "info", "log", "time", "timeEnd", "trace"]    
+  },
+  "jsRules": {
+    "max-line-length": [120]
+  }
 }

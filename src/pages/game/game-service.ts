@@ -4,7 +4,7 @@ import { Http,
          RequestOptions,
          Response }         from '@angular/http';
 import { Observable }       from 'rxjs/Rx';
-import { Game }          from '../../classes/game-class';
+import { Game }          from '../../classes/game.class';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';

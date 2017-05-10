@@ -5,7 +5,7 @@ import { Http,
          Response }         from '@angular/http';
 import { Observable }       from 'rxjs/Rx';
 import { Team }             from '../../classes/team.class';
-import { Game }             from '../../classes/game-class';
+import { Game }             from '../../classes/game.class';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
