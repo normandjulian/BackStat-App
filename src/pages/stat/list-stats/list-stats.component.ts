@@ -12,15 +12,13 @@ export class ListStatsComponent implements OnInit {
     /* Variables */
     public stats: Stat[] = null;
     public game_id: string = null;
+    public actions: any = {};
     constructor(
         public viewCtrl: ViewController,
         public storage: Storage,
-        public navParams: NavParams) { }
-
-    ngOnInit(): void {
-        this.game_id = this.navParams.get('game_id');
-        this.load_stats();
-    }
+        public navParams: NavParams) {
+            this.set_action_label();
+        }
 
     load_stats() {
         this.storage.get(this.game_id).then((res) => {
@@ -46,5 +44,24 @@ export class ListStatsComponent implements OnInit {
             this.storage.set( this.game_id, JSON.stringify(game));
             this.load_stats();
         });
+    }
+
+    set_action_label() {
+        this.actions.blk = 'Contres';
+        this.actions.ast = 'Passe décisive';
+        this.actions.dreb = 'Rebond défencif';
+        this.actions.oreb = 'Rebond offencif';
+        this.actions.pf = 'Faute';
+        this.actions.st = 'Interception';
+        this.actions.to = 'Balle perdu';
+    }
+
+    get_action_label(label: string): string {
+        return this.actions[label];
+    }
+
+    ngOnInit(): void {
+        this.game_id = this.navParams.get('game_id');
+        this.load_stats();
     }
 }

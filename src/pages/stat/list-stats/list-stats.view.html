@@ -18,7 +18,7 @@
       <ion-avatar item-left>
         <img src="../assets/images/jersey/_{{stat.player.number}}-tee-shirt.svg">
       </ion-avatar>
-      <h2>{{stat.action}}</h2>
+      <h2>{{stat.time}} - {{get_action_label(stat.action)}}</h2>
       <p>{{stat.player.lastname | uppercase}}</p>
       <button ion-button clear item-right (tap)="delete_action(stat)"><ion-icon name="trash"></ion-icon></button>
     </ion-item>
