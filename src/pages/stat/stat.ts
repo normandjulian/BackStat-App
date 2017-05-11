@@ -54,8 +54,11 @@ export class StatPage implements OnInit {
     this.storage.get(this.game_id).then((res) => {
       if (res) {
         let game = JSON.parse(res);
+        let _id = game.stats.length;
+        
+        stat._id = String(_id);
         game.stats.push(stat);
-        console.dir(game);
+
         this.storage.set(this.game_id, JSON.stringify(game));
         this.clean_stat();
       }
@@ -102,8 +105,9 @@ export class StatPage implements OnInit {
     this.selectPlayer = false;
   }
 
-  tapOnPlayer(player_id: string): void {
-    this.stat['player_id'] = player_id;
+  tapOnPlayer(player: Player): void {
+    this.stat['player_id'] = player._id;
+    this.stat['player'] = player;
     this.selectPlayer = true;
 
     this.push_stat_2storage(this.stat);
@@ -146,9 +150,8 @@ export class StatPage implements OnInit {
   }
 
   ngOnInit() {
-    this.game_id = this.navParams.get('game_id') || '5856b947c5242563c5a4cfbc'
+    this.game_id = this.navParams.get('game_id') || '5856b947c5242563c5a4cfbc';
     this.team_id = this.navParams.get('team_id') || '5856b7bd80affe631645e390';
-
     this.set_up();
   }
 

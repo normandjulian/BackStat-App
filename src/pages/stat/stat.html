@@ -125,7 +125,7 @@
           <li *ngFor="let action of actions"><img (tap)="tapOnAction(action)" src="../assets/images/{{action}}.png"></li>
         </ul>
         <ul [hidden]="selectPlayer" class="circle-player">
-          <li *ngFor="let player of players"><img (tap)="tapOnPlayer(player._id);" src="../assets/images/jersey/_{{player.number}}-tee-shirt.svg"></li>
+          <li *ngFor="let player of players"><img (tap)="tapOnPlayer(player);" src="../assets/images/jersey/_{{player.number}}-tee-shirt.svg"></li>
         </ul>
       </ion-col>
       <ion-col col-3>

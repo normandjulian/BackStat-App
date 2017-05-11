@@ -1,11 +1,12 @@
+import {Player} from './player.class';
+
 export class Stat {
-    constructor(
-        public _id: string,
-        public area: number,
-        public time: string,
-        public action: string,
-        public player_id: string,
-        public game_id: string,
-        public team_id: string
-    ){}
+    _id: string;
+    area: number;
+    time: string;
+    action: string;
+    player_id: string;
+    game_id: string;
+    team_id: string;
+    player?: Player;
 }

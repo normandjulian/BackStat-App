@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { NavParams } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { NavParams, ViewController } from 'ionic-angular';
+import { Stat } from '../../../classes/stat.class';
 import { Storage } from '@ionic/storage';
 
-import { Stat } from '../../../classes/stat.class';
 
 @Component({
     selector: 'list-stats',
@@ -13,6 +13,7 @@ export class ListStatsComponent implements OnInit {
     public stats: Stat[] = null;
     public game_id: string = null;
     constructor(
+        public viewCtrl: ViewController,
         public storage: Storage,
         public navParams: NavParams) { }
 
@@ -25,6 +26,25 @@ export class ListStatsComponent implements OnInit {
         this.storage.get(this.game_id).then((res) => {
             let game = JSON.parse(res);
             this.stats = game.stats;
+        });
+    }
+
+    dismiss() {
+        this.viewCtrl.dismiss();
+    }
+
+    delete_action(stat: Stat) {
+        this.storage.get(this.game_id).then((res) => {
+            // debugger;
+            let game = JSON.parse(res);
+            let index = game.stats.length;
+            while (index--) {
+                if (game.stats[index]._id === stat._id) {
+                    game.stats.splice(index, 1);
+                }
+            }
+            this.storage.set( this.game_id, JSON.stringify(game));
+            this.load_stats();
         });
     }
 }
