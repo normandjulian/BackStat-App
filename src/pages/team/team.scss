@@ -4,12 +4,13 @@ page-team {
       color: white;
       text-align: center;
     }
-    ion-row {
-      ion-col {
-        ion-list {
-          padding-left: 0;
-          padding-right: 0;
-        }
+  }
+  ion-content {
+    ion-list {
+      padding-left: 0;
+      padding-right: 0;
+      button ion-icon {
+        font-size: 2em;
       }
     }
   }

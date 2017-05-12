@@ -14,12 +14,12 @@ export class RegisterPage implements OnInit {
   public clubs         : Array<Object> = [];
   public selectedClub  : Object = null;
   public submitted     : boolean;
-  public registerForm = null;
+  public register_form = null;
 
   constructor (
     public navController: NavController,
     public registerService: RegisterService,
-    public formBuilder: FormBuilder,
+    public fb: FormBuilder,
     public alertCtrl: AlertController ) { };
 
   sign_up (value, isValid) {
@@ -28,9 +28,7 @@ export class RegisterPage implements OnInit {
         .then(
           res => {
             if (res['message']) {
-              console.warn(res['message']);
             } else {
-              console.info('Acounte created');
               this.navController.push( LoginPage );
             }
           },
@@ -62,7 +60,7 @@ export class RegisterPage implements OnInit {
         error => console.log(error)
       );
 
-    this.registerForm = this.formBuilder.group({
+    this.register_form = this.fb.group({
         email     : ['', [<any>Validators.required]],
         lastname  : ['', [<any>Validators.required]],
         firstname : ['', [<any>Validators.required]],

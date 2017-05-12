@@ -6,21 +6,54 @@
 </ion-header>
 
 <ion-content padding scroll="false">
-  <form [formGroup]="teamForm" novalidate (ngSubmit)="save_team( teamForm.value )">
+  <form [formGroup]="team_form" novalidate (ngSubmit)="save_team( team_form.value )">
     <ion-list>
 
       <ion-item>
         <ion-label stacked>Nom de votre équipe</ion-label>
-        <ion-input type="text" placeholder="Cadets 1" formControlName=name></ion-input>
+        <ion-input type="text" placeholder="Cadets 1" formControlName="name"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Nom du coach</ion-label>
-        <ion-input type="text" placeholder="Steve Kerr" formControlName=coach></ion-input>
+        <ion-input type="text" placeholder="Steve Kerr" formControlName="coach"></ion-input>
       </ion-item>
-
-      <button type="submit" [disabled]="!teamForm.valid" ion-button full color="tango">{{fields.bSaveTeam}}</button>
     </ion-list>
+
+    <ion-grid formGroupName="period">
+      <ion-row>
+        <ion-col>
+          <ion-list radio-group formControlName="type">
+            <ion-list-header>
+              Auto Manufacturers
+            </ion-list-header>
+
+            <ion-item>
+              <ion-label>Mi-temps</ion-label>
+              <ion-radio value="2"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Quart-temps</ion-label>
+              <ion-radio value="4"></ion-radio>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col>
+          <ion-list>
+            <ion-list-header>
+              Auto Manufacturers
+            </ion-list-header>
+            <ion-item>
+              <ion-input type="number" placeholder="Temps" formControlName="time"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <button type="submit" [disabled]="!team_form.valid" ion-button full color="tango">{{fields.bSaveTeam}}</button>
   </form>
   <ion-grid *ngIf="team.players">
     <h1>{{team.players.length}} joueurs dans l'équipe

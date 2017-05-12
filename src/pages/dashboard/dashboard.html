@@ -11,7 +11,7 @@
 
         <div class="header">
           <h1>Vos équipes
-            <button ion-button icon-only outline color="white" (tap)="manage_team( null )">
+            <button ion-button icon-only outline color="white" (tap)="goto_teamPage( null )">
               <ion-icon name="add"></ion-icon>
             </button>
           </h1>
@@ -22,7 +22,7 @@
             {{team.name}} - {{team.coach}}
           </ion-card-header>
           <ion-card-content>
-            <button ion-button icon-only clear [hidden]="team !== selected_team" (tap)="manage_team(team._id)">
+            <button ion-button icon-only clear [hidden]="team !== selected_team" (tap)="goto_teamPage(team._id)">
               <ion-icon name="eye"></ion-icon>
             </button>
             <button ion-button icon-only clear [hidden]="team !== selected_team" (tap)="delete_team(team._id)">
@@ -35,7 +35,7 @@
       <ion-col width-50>
         <div class="header">
           <h1>Vos matchs
-            <button ion-button icon-only outline color="white" (tap)="manage_game( null )">
+            <button ion-button icon-only outline color="white" (tap)="goto_gamePage( null )">
               <ion-icon name="add"></ion-icon>
             </button>
           </h1>
@@ -46,7 +46,7 @@
             {{game.opponent}}
           </ion-card-header>
           <ion-card-content>
-            <button [hidden]="game !== selected_game" ion-button icon-only clear (tap)="manage_game(game._id)">
+            <button [hidden]="game !== selected_game" ion-button icon-only clear (tap)="goto_gamePage(game._id)">
               <ion-icon name="eye"></ion-icon>
             </button>
             <button [hidden]="game !== selected_game" ion-button icon-only clear (tap)="delete_game(game._id)">

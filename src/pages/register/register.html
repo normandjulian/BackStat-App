@@ -7,50 +7,47 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="logo">
-    <img src="assets/images/backstat.png" alt="Logo BackStat">
-  </div>
-  <form [formGroup]="registerForm" novalidate (ngSubmit)="sign_up(registerForm.value, registerForm.valid)">
+  <form [formGroup]="register_form" novalidate (ngSubmit)="sign_up(register_form.value, register_form.valid)">
     <ion-list>
 
-      <ion-item [ngClass]="{'error': !(registerForm.controls.email.valid || (registerForm.controls.email.pristine))}">
+      <ion-item [class.error]="!(register_form.controls.email.valid || (register_form.controls.email.pristine))">
         <ion-label>E-mail*
           <input type="text" placeholder="steph.curry@gmail.com" formControlName="email">
         </ion-label>
       </ion-item><!-- Email -->
 
-      <ion-item [ngClass]="{'error': !(registerForm.controls.lastname.valid || (registerForm.controls.lastname.pristine))}">
+      <ion-item [class.error]="!(register_form.controls.lastname.valid || (register_form.controls.lastname.pristine))">
         <ion-label>Nom*
-          <input type="text" placeholder="Curry" formControlName=lastname>
+          <input type="text" placeholder="Curry" formControlName="lastname">
         </ion-label>
       </ion-item><!-- Lastname -->
 
-      <ion-item [ngClass]="{'error': !(registerForm.controls.firstname.valid || (registerForm.controls.firstname.pristine))}">
+      <ion-item [class.error]="!(register_form.controls.firstname.valid || (register_form.controls.firstname.pristine))">
         <ion-label>Prenom*
-          <input type="text" placeholder="Stephen" formControlName=firstname>
+          <input type="text" placeholder="Stephen" formControlName="firstname">
         </ion-label>
       </ion-item><!-- firstname -->
 
-      <ion-item [ngClass]="{'error': !(registerForm.controls.fstpwd.valid || (registerForm.controls.fstpwd.pristine))}">
+      <ion-item [class.error]="!(register_form.controls.fstpwd.valid || (register_form.controls.fstpwd.pristine))">
         <ion-label>Mot de passe*
-          <input type="password" placeholder="P@ssword" formControlName=fstpwd>
+          <input type="password" placeholder="P@ssword" formControlName="fstpwd">
         </ion-label>
       </ion-item>
 
-      <ion-item [ngClass]="{'error': !(registerForm.controls.scdpwd.valid || (registerForm.controls.scdpwd.pristine))}">
+      <ion-item [class.error]="!(register_form.controls.scdpwd.valid || (register_form.controls.scdpwd.pristine))">
         <ion-label>Confirmation du mot de passe*
-          <input type="password" placeholder="P@ssword" formControlName=scdpwd>
+          <input type="password" placeholder="P@ssword" formControlName="scdpwd">
         </ion-label>
       </ion-item>
 
       <ion-item>
         <ion-label>Equipe*</ion-label>
-        <ion-select formControlName=club>
+        <ion-select formControlName="club">
           <ion-option *ngFor="let club of clubs" value="{{club._id}}">{{club.name}}</ion-option>
         </ion-select>
-      </ion-item>-->
+      </ion-item>
 
-      <button type="submit" [disabled]="!registerForm.valid" ion-button full color="tango">Créer mon compte</button>
+      <button type="submit" [disabled]="!register_form.valid" ion-button full color="tango">Créer mon compte</button>
     </ion-list>
   </form>
 </ion-content>

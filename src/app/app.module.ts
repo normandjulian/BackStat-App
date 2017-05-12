@@ -3,14 +3,12 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { BackstatService } from '../providers/backstat-service';
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
+import { APP_CONFIG, AppConfig } from './app.config';
 
 // pages
 import { HomePage } from '../pages/home/home';
@@ -58,6 +56,7 @@ import { ListStatsComponent } from '../pages/stat/list-stats/list-stats.componen
     ListStatsComponent
   ],
   providers: [
+    { provide: APP_CONFIG, useValue: AppConfig },
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
