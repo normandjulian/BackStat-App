@@ -15,7 +15,7 @@ import { LoginService } from './login-service'
 export class LoginPage implements OnInit {
   public user: any;
   public isLogged: Boolean = false;
-  public login_form = null;
+  public login_form: any = null;
 
   constructor(
     public navController: NavController,
