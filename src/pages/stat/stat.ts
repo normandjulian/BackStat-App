@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { StatService } from './stat-service';
 import { Stat } from '../../classes/stat.class';
 import { Player } from '../../classes/player.class';
-import { ListStatsComponent } from './list-stats/list-stats.component'
+import { ListStatsComponent } from './list-stats/list-stats.component';
 
 @Component({
   selector: 'page-stat',
@@ -55,7 +55,7 @@ export class StatPage implements OnInit {
       if (res) {
         let game = JSON.parse(res);
         let _id = game.stats.length;
-        
+
         stat._id = String(_id);
         game.stats.push(stat);
 

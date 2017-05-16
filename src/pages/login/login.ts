@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, NavParams, ModalController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 
+import { Storage } from '@ionic/storage';
 import { RegisterPage } from '../register/register';
 import { DashboardPage } from '../dashboard/dashboard';
 import { LoginService } from './login-service';
+
+import { Guest } from '../../classes/user.class';
 
 @Component({
   selector: 'page-login',
@@ -13,29 +16,31 @@ import { LoginService } from './login-service';
 })
 
 export class LoginPage implements OnInit {
-  public user: any;
+  public user: Guest;
   public isLogged: Boolean = false;
   public login_form: any = null;
+  public toStore: boolean = false;
 
-  constructor(
-    public navController: NavController,
-    public loginService: LoginService,
-    public alertCtrl: AlertController,
-    public fb: FormBuilder,
-    public modalCtrl: ModalController,
-    public navParams: NavParams) { }
+  constructor(public navController: NavController, public storage: Storage, public loginService: LoginService, public alertCtrl: AlertController, public fb: FormBuilder, public modalCtrl: ModalController, public navParams: NavParams) { }
 
-  notification(message: string) {
-    let alert = this.alertCtrl.create({
+  /**
+  * Display a notification to the layout
+  * @param  {string} message [The message to display]
+  */
+  notification(message: string): void {
+    this.alertCtrl.create({
       title: 'Information',
       subTitle: message,
       buttons: ['OK']
-    });
-    alert.present();
+    }).present();
   }
 
-  sign_in(value: any) {
-    this.loginService.sign_in({ email: value.email, password: value.password }).subscribe(
+  /**
+  * Login to the application
+  * @param  {Guest}  guest [The pair login/password]
+  */
+  sign_in(guest: Guest): void {
+    this.loginService.sign_in(guest).subscribe(
       res => {
         if (res['error']) {
           this.notification(res['message']);
@@ -48,7 +53,10 @@ export class LoginPage implements OnInit {
     );
   }
 
-  goto_registerPage() {
+  /**
+  * Redirect to the page Register
+  */
+  goto_registerPage(): void {
     this.modalCtrl.create(RegisterPage).present();
   }
 
@@ -57,8 +65,8 @@ export class LoginPage implements OnInit {
   }
 
   /**
-   * Initialisation of the page
-   */
+  * Initialisation of the page
+  */
   ngOnInit() {
     this.login_form = this.fb.group({
       email: ['', [<any>Validators.required]],

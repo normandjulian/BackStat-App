@@ -5,7 +5,6 @@
   "rules": {
     "no-duplicate-variable": true,
     "no-unused-variable": [true],
-    "max-line-length": [120],
     "new-parens": true,
     "no-arg": true,
     "no-bitwise": true,
@@ -25,10 +24,6 @@
     ],
     "label-position": true,
     "label-undefined": true,
-    "max-line-length": [
-      true,
-      140
-    ],
     "member-access": false,
     "member-ordering": [
       true,
@@ -102,6 +97,5 @@
     ]
   },
   "jsRules": {
-    "max-line-length": [120]
   }
 }
