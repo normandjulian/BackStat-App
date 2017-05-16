@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { RegisterPage } from '../register/register';
 import { DashboardPage } from '../dashboard/dashboard';
-import { LoginService } from './login-service'
+import { LoginService } from './login-service';
 
 @Component({
   selector: 'page-login',
@@ -25,18 +25,17 @@ export class LoginPage implements OnInit {
     public modalCtrl: ModalController,
     public navParams: NavParams) { }
 
-  notification(_message) {
+  notification(message: string) {
     let alert = this.alertCtrl.create({
       title: 'Information',
-      subTitle: _message,
+      subTitle: message,
       buttons: ['OK']
     });
     alert.present();
   }
 
   sign_in(value: any) {
-    this.loginService.sign_in({ email: value.email, password: value.password })
-      .subscribe(
+    this.loginService.sign_in({ email: value.email, password: value.password }).subscribe(
       res => {
         if (res['error']) {
           this.notification(res['message']);
@@ -46,7 +45,7 @@ export class LoginPage implements OnInit {
         }
       },
       err => console.error(err)
-      );
+    );
   }
 
   goto_registerPage() {
@@ -55,7 +54,6 @@ export class LoginPage implements OnInit {
 
   save_credits() {
     // TODO
-    console.log('TODO');
   }
 
   /**

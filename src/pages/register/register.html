@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="register_form" novalidate (ngSubmit)="sign_up(register_form.value, register_form.valid)">
+  <form [formGroup]="register_form" novalidate (ngSubmit)="register(register_form.value, register_form.valid)">
     <ion-list>
 
       <ion-item [class.error]="!(register_form.controls.email.valid || (register_form.controls.email.pristine))">
@@ -28,21 +28,21 @@
         </ion-label>
       </ion-item><!-- firstname -->
 
-      <ion-item [class.error]="!(register_form.controls.fstpwd.valid || (register_form.controls.fstpwd.pristine))">
+      <ion-item [class.error]="!(register_form.controls.password.valid || (register_form.controls.password.pristine))">
         <ion-label>Mot de passe*
-          <input type="password" placeholder="P@ssword" formControlName="fstpwd">
+          <input type="password" placeholder="P@ssword" formControlName="password">
         </ion-label>
       </ion-item>
 
-      <ion-item [class.error]="!(register_form.controls.scdpwd.valid || (register_form.controls.scdpwd.pristine))">
+      <ion-item [class.error]="!(register_form.controls.confirm_pwd.valid || (register_form.controls.confirm_pwd.pristine))">
         <ion-label>Confirmation du mot de passe*
-          <input type="password" placeholder="P@ssword" formControlName="scdpwd">
+          <input type="password" placeholder="P@ssword" formControlName="confirm_pwd">
         </ion-label>
       </ion-item>
 
       <ion-item>
         <ion-label>Equipe*</ion-label>
-        <ion-select formControlName="club">
+        <ion-select formControlName="club_id">
           <ion-option *ngFor="let club of clubs" value="{{club._id}}">{{club.name}}</ion-option>
         </ion-select>
       </ion-item>

@@ -21,6 +21,6 @@
   ],
   "compileOnSave": false,
   "atom": {
-    "rewriteTsconfig": true
+    "rewriteTsconfig": false
   }
 }
