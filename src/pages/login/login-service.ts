@@ -3,6 +3,7 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Guest } from '../../classes/user.class';
+import { USERS } from '../../mocks/users.mock';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -16,8 +17,15 @@ export class LoginService {
     let headers = new Headers(this.headers);
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(`${this.config.apiEndpoint}signin`, guest, options)
+    if (this.config.network) {
+      return this.http.post(`${this.config.apiEndpoint}signin`, guest, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    } else {
+      let user = USERS.find( user => {
+        return user.email === guest.email;
+      });
+      return Observable.of(user);
+    }
   }
 }

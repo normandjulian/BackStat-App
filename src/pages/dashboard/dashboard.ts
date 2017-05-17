@@ -43,13 +43,13 @@ export class DashboardPage implements OnInit {
         res => {
           for (let key in this.teams) {
             if (this.teams[key]._id === _id) {
-              this.teams.splice(Number(key), 1)
+              this.teams.splice(Number(key), 1);
             }
           }
         },
         err => console.log(err)
-      )
-    })
+      );
+    });
   }
 
   /**
@@ -60,21 +60,13 @@ export class DashboardPage implements OnInit {
       this.selected_team = null;
     } else {
       this.selected_team = team;
-      // this.dashboardService.get_games(this.selected_team._id).subscribe(
-      //   res => {
-      //     this.games = res
-      //     this.select_game(this.games[0])
-      //   },
-      //   err => console.error(err)
-      // )
-      this.games = [{
-        "_id": "5856b947c5242563c5a4cfbc",
-        "opponent": "Cholet",
-        "date": new Date("2016-01-01T00:00:00.000Z"),
-        "home": true,
-        "team_id": "5856b7bd80affe631645e390",
-      }];
-      this.select_game(this.games[0]);
+      this.dashboardService.get_games(this.selected_team._id).subscribe(
+        res => {
+          this.games = res;
+          this.select_game(this.games[0]);
+        },
+        err => console.error(err)
+      );
     }
   }
 
@@ -107,54 +99,51 @@ export class DashboardPage implements OnInit {
     }
   }
 
-  notification(_title, _message, _btnLabel, _callback) {
+  /**
+   * Display a notification for the user
+   * @param  {string} title    [The title of the notification]
+   * @param  {string} message  [Its message]
+   * @param  {string} btnLabel [The text of the button]
+   * @param  {any}    callback [Any function to pass after the notification]
+   */
+  notification(title: string, message: string, btnLabel: string, callback: any): void {
     this.alertCtrl.create({
-      title: _title,
-      message: _message,
+      title: title,
+      message: message,
       buttons: [
         {
           text: 'Annuler',
           role: 'cancel',
           handler: () => { }
         }, {
-          text: _btnLabel,
-          handler: () => _callback()
+          text: btnLabel,
+          handler: () => callback()
         }
       ]
     }).present();
   }
 
-  goto_stat(_id) {
+  /**
+   * Nav to the StatPage
+   * @param  {string} id [The game's id]
+   */
+  goto_stat(id: string): void {
     this.navController.push(StatPage, {
       team_id: this.selected_team._id,
-      game_id: _id
+      game_id: id
     });
   }
 
   ngOnInit() {
-    // this.dashboardService.get_teams().subscribe(
-    //   res => {
-    //     this.teams = res;
-    //     if (this.teams.length > 0) {
-    //       this.select_team( this.teams[0] );
+    this.dashboardService.get_teams().subscribe(
+      res => {
+        this.teams = res;
+        if (this.teams.length > 0) {
+          this.select_team(this.teams[0]);
 
-    //     }
-    //   },
-    //   err => console.error( err )
-    // )
-
-    this.teams = [
-      {
-        "_id": "5856b7bd80affe631645e390",
-        "name": "Seniors 2",
-        "coach": "BoBi",
+        }
       },
-      {
-        "_id": "5856b8f2bd6c1763b20faef5",
-        "name": "Seniors 1",
-        "coach": "Juju",
-      }
-    ];
-    this.select_team(this.teams[0]);
+      err => console.error(err)
+    );
   };
 }

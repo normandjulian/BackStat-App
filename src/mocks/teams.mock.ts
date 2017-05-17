@@ -9,6 +9,6 @@ export const TEAMS: Team[] = [
     {
         '_id': '5856b8f2bd6c1763b20faef5',
         'name': 'Seniors 2',
-        'coach': 'Bobi',
+        'coach': 'Booba',
     }
 ];

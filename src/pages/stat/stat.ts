@@ -44,7 +44,7 @@ export class StatPage implements OnInit {
         let game = {
           _id: this.game_id,
           stats: []
-        }
+        };
         this.storage.set(this.game_id, JSON.stringify(game));
       }
     });
@@ -141,8 +141,7 @@ export class StatPage implements OnInit {
         number: 7,
         team_id: '5856b8f2bd6c1763b20faef5'
       },
-
-    ]
+    ];
     // this.statService.get_players(this.stat.team_id).subscribe(
     //   res => this.players = res,
     // )
@@ -156,7 +155,7 @@ export class StatPage implements OnInit {
   }
 
   presentProfileModal() {
-   let profileModal = this.modalCtrl.create(ListStatsComponent, { game_id: this.game_id });
-   profileModal.present();
- }
+    let profileModal = this.modalCtrl.create(ListStatsComponent, { game_id: this.game_id });
+    profileModal.present();
+  }
 }

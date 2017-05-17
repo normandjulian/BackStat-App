@@ -1,8 +1,6 @@
 export class TeamFull {
-    constructor(
-        public _id: string,
-        public name: string,
-        public coach: string,
-        public players: Array<Object>
-    ){}
+  _id: string;
+  name: string;
+  coach: string;
+  players: Array<Object>;
 }

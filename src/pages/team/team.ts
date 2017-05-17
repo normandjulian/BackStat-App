@@ -57,7 +57,7 @@ export class TeamPage {
     this.teamService.get_team(_id).subscribe(
       res => this.initFields(res),
       err => console.error(err)
-    )
+    );
   }
 
   initFields(_data) {
@@ -95,7 +95,7 @@ export class TeamPage {
           }
         },
         err => console.error(err)
-      )
+      );
     } else { // ++++++++++++++++++> Create player
       let player = _value;
       player.team_id = this.team._id;
@@ -107,7 +107,7 @@ export class TeamPage {
             lastname: res.lastname,
             number: res.number,
             team_id: res.team_id
-          })
+          });
           this.playerForm.setValue({
             firstname: null,
             lastname: null,
@@ -161,7 +161,6 @@ export class TeamPage {
       number: ['', [<any>Validators.required]]
     });
 
-    console.log(!!this.navParams.get('_id'))
     if (!!this.navParams.get('_id')) {
       this.get_team(this.navParams.get('_id'));
     } else {

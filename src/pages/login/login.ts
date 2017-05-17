@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   public login_form: any = null;
   public toStore: boolean = false;
 
-  constructor(public navController: NavController, public storage: Storage, public loginService: LoginService, public alertCtrl: AlertController, public fb: FormBuilder, public modalCtrl: ModalController, public navParams: NavParams) { }
+  constructor(public navCtrl: NavController, public storage: Storage, public loginService: LoginService, public alertCtrl: AlertController, public fb: FormBuilder, public modalCtrl: ModalController, public navParams: NavParams) { }
 
   /**
   * Display a notification to the layout
@@ -45,8 +45,8 @@ export class LoginPage implements OnInit {
         if (res['error']) {
           this.notification(res['message']);
         } else {
-          localStorage.setItem('user', JSON.stringify(res));
-          this.navController.push(DashboardPage);
+          this.storage.set('credits', JSON.stringify(res));
+          this.navCtrl.setRoot(DashboardPage);
         }
       },
       err => console.error(err)
@@ -64,6 +64,18 @@ export class LoginPage implements OnInit {
     // TODO
   }
 
+  lf_credits_storage() {
+    this.storage.get('credits').then(res => {
+      if (res) {
+        let user = JSON.parse(res);
+        this.sign_in({
+          'email': user.email,
+          'password': user.password
+        });
+      }
+    });
+  }
+
   /**
   * Initialisation of the page
   */
@@ -72,8 +84,11 @@ export class LoginPage implements OnInit {
       email: ['', [<any>Validators.required]],
       password: ['', [<any>Validators.required]]
     });
-    // this.sign_in({ email : 'maelle.skwara@gmail.com', password: 'maelle'});
 
+    // Check the storage for auto signin
+    this.lf_credits_storage();
+
+    // Get the email from the RegisterPage
     if (typeof this.navParams.get('email') !== 'undefined') {
       this.login_form.setValue({
         email: this.navParams.get('email')

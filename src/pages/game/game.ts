@@ -18,7 +18,7 @@ export class GamePage implements OnInit {
     'date': null,
     'home': null,
     'team_id': null
-  }
+  };
   public fields: any = {
     'bSaveGame': ''
   };
@@ -41,15 +41,15 @@ export class GamePage implements OnInit {
       this.gameService.update_game(_game).subscribe(
         res => this.set_up(res),
         err => console.error(err)
-      )
+      );
     } else {  // ++++++++++++++++++++++++++++> Create
       let game = _game;
       game.team_id = this.team_id;
-      game.home = (game.home === true) ? true : false
+      game.home = !!game.home;
       this.gameService.create_game(_game).subscribe(
         res => this.set_up(res),
         err => console.error(err)
-      )
+      );
     }
   }
 
