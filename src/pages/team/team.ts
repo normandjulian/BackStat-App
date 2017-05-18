@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Player } from '../../classes/player.class';
-import { TeamFull } from '../../classes/team-full.class';
+import { TeamFull } from '../../classes/team.class';
 import { TeamService } from './team-service';
 
 @Component({
@@ -10,17 +10,11 @@ import { TeamService } from './team-service';
   templateUrl: 'team.html',
   providers: [TeamService]
 })
-
 export class TeamPage {
   public team_form = null;
   public playerForm: FormGroup;
   public isNew: Boolean = true;
-  public team: TeamFull = {
-    '_id': null,
-    'name': null,
-    'coach': null,
-    'players': null
-  };
+  public team: TeamFull = null;
   public selected_player: Player = null;
   public fields: any = {
     'bSaveTeam': '',
@@ -38,43 +32,45 @@ export class TeamPage {
    * Save (update or create) the current team
    * @param  {[Object]} value [description]
    */
-  save_team(value) {
-    console.log(value);
-    // if (this.team['_id']) {
-    //   this.teamService.update_team(value, this.team._id).subscribe(
-    //     res => this.get_team(res['_id']),
-    //     err => console.error(err)
-    //   )
-    // } else {
-    //   this.teamService.create_team(value).subscribe(
-    //     res => this.get_team(res['_id']),
-    //     err => console.error(err)
-    //   )
-    // }
-  }
+  // save_team(value) {
+  //   console.log(value);
+  //   // if (this.team['_id']) {
+  //   //   this.teamService.update_team(value, this.team._id).subscribe(
+  //   //     res => this.get_team(res['_id']),
+  //   //     err => console.error(err)
+  //   //   )
+  //   // } else {
+  //   //   this.teamService.create_team(value).subscribe(
+  //   //     res => this.get_team(res['_id']),
+  //   //     err => console.error(err)
+  //   //   )
+  //   // }
+  // }
 
-  get_team(_id) {
-    this.teamService.get_team(_id).subscribe(
+  get_team(id: string) {
+    this.teamService.get_team(id).subscribe(
       res => this.initFields(res),
       err => console.error(err)
     );
   }
 
-  initFields(_data) {
-    if (!!_data) {
-      this.team = _data;
-      this.team_form.setValue({
-        name: this.team.name,
-        coach: this.team.coach || null
-      });
-      this.fields['bSaveTeam'] = 'Modifier l\'équipe';
-      if (!!this.team.players) {
-        this.select_player(this.team.players[0]);
-      } else {
-        this.select_player(null);
+  initFields(team: TeamFull) {
+    this.team = team;
+    this.team_form.patchValue({
+      'name': this.team.name,
+      'coach': this.team.coach || null,
+      'period': {
+        'time': this.team.period.time,
+        'type': this.team.period.type
       }
+    });
+
+    this.fields['bSaveTeam'] = 'Modifier l\'équipe';
+
+    if (!!this.team.players) {
+      this.select_player(this.team.players[0]);
     } else {
-      this.fields['bSaveTeam'] = 'Créer une équipe';
+      this.select_player(null);
     }
   }
 
@@ -117,7 +113,7 @@ export class TeamPage {
         err => console.error(err)
       );
     }
-  };
+  }
 
   select_player(_player) {
     if (!!_player) {
@@ -137,12 +133,7 @@ export class TeamPage {
       });
       this.fields['bSavePlayer'] = 'Créer un joueur';
     }
-
   }
-
-  change_mode() { // ++++++++++++++++++++++++++++++++++++++++++> Mode [Create]
-
-  };
 
   ngOnInit() {
     // The form for the team
@@ -164,7 +155,7 @@ export class TeamPage {
     if (!!this.navParams.get('_id')) {
       this.get_team(this.navParams.get('_id'));
     } else {
-      this.initFields(null);
+      this.fields['bSaveTeam'] = 'Créer une équipe';
     }
   };
 }
