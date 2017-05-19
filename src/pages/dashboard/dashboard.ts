@@ -58,6 +58,7 @@ export class DashboardPage implements OnInit {
   select_team(team: Team) {
     if ((this.selected_team === team) || (team === null)) {
       this.selected_team = null;
+      this.games = [];
     } else {
       this.selected_team = team;
       this.dashboardService.get_games(this.selected_team._id).subscribe(

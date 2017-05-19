@@ -1,14 +1,12 @@
 // http://ionicframework.com/docs/v2/theming/
-ion-content {
-  background-image: url(../assets/images/background.jpg) !important;
-  //http://www.gettyimages.fr/license/56499668
+.ion-page > ion-content {
+  background: linear-gradient(to right,color($colors, bleufonce), color($colors, bleu));
+  //  background-color: rgba($red, $red, $red, $alpha);color($colors, bleufonce);
+   font-family: 'Nunito', sans-serif;
 }
-
-$orange : #bd5a22;
-
-.error {
-  border: 3px solid $orange !important;
-}
+// .error {
+//   border: 3px solid $orange !important;
+// }
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These

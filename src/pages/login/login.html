@@ -10,7 +10,7 @@
     <img src="assets/images/backstat.png" alt="">
   </div>
   <form [formGroup]="login_form" novalidate (ngSubmit)="sign_in(login_form.value)">
-    <ion-list>
+    <!-- <ion-list>
       <ion-item class="no-border">
         <ion-label>E-mail
           <input type="text" placeholder="Julian" formControlName="email">
@@ -32,6 +32,21 @@
       <ion-item class="reverse">
         <h3 (tap)="goto_registerPage()">Pas enore de compte ? Inscrivez-vous !</h3>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
+
+    <div class="input">
+      <label for="">Adresse Email</label>
+      <input type="text" placeholder="E-mail"/>
+    </div>
+    <div class="input">
+      <label for="">Mot de passe</label>
+      <input type="password" placeholder="Password"/>
+    </div>
+    <div>
+      <button>Coucou</button>
+    </div>
+    <!-- <input type="checkbox"/> -->
+    <!-- <label>Remember Me ?</label> -->
+    <!-- <button type="button" name="button">Connexion</button> -->
   </form>
 </ion-content>

@@ -47,30 +47,37 @@ export class TeamPage {
   //   // }
   // }
 
-  get_team(id: string) {
-    this.teamService.get_team(id).subscribe(
-      res => this.initFields(res),
-      err => console.error(err)
-    );
-  }
+  /**
+   * Set up the page
+   * Get the team if there is a id else change the label
+   * @param  {string} id [id of the team. Can be null/undefined]
+   */
+  set_up(id: string): void {
+    if (id) {
+      this.teamService.get_team(id).subscribe(
+        res => {
+          this.team = res;
+          this.team_form.patchValue({
+            'name': this.team.name,
+            'coach': this.team.coach || null,
+            'period': {
+              'time': this.team.period.time,
+              'type': this.team.period.type
+            }
+          });
 
-  initFields(team: TeamFull) {
-    this.team = team;
-    this.team_form.patchValue({
-      'name': this.team.name,
-      'coach': this.team.coach || null,
-      'period': {
-        'time': this.team.period.time,
-        'type': this.team.period.type
-      }
-    });
+          this.fields['bSaveTeam'] = 'Modifier l\'équipe';
 
-    this.fields['bSaveTeam'] = 'Modifier l\'équipe';
-
-    if (!!this.team.players) {
-      this.select_player(this.team.players[0]);
+          if (!!this.team.players) {
+            this.select_player(this.team.players[0]);
+          } else {
+            this.select_player(null);
+          }
+        },
+        err => console.error(err)
+      );
     } else {
-      this.select_player(null);
+      this.fields['bSaveTeam'] = 'Créer une équipe';
     }
   }
 
@@ -152,10 +159,11 @@ export class TeamPage {
       number: ['', [<any>Validators.required]]
     });
 
-    if (!!this.navParams.get('_id')) {
-      this.get_team(this.navParams.get('_id'));
-    } else {
-      this.fields['bSaveTeam'] = 'Créer une équipe';
-    }
+    this.set_up(this.navParams.get('_id'));
+    // if (!!this.navParams.get('_id')) {
+    //   this.get_team(this.navParams.get('_id'));
+    // } else {
+    //   this.fields['bSaveTeam'] = 'Créer une équipe';
+    // }
   };
 }

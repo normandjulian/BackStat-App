@@ -1,16 +1,39 @@
 page-login {
   ion-content {
     div.logo {
+      visibility: hidden;
       text-align: center;
     }
-    ion-list {
-      padding-left: 200px;
-      padding-right: 200px;
-
-      .reverse {
-        background-color: transparent;
-        color: $orange;
+    form {
+      width: 40%;
+      margin: auto;
+      .input {
+        border-top: 1px solid color($colors, bleuclaire);
+        margin-bottom: 20px;
+        color: color($colors, pale);
+        font-size: x-large;
+        label {
+          text-transform: uppercase;
+        }
+        input {
+          background-color: transparent;
+          width: 100%;
+          height: 50px;
+          border: none;
+        }
+      }
+      button {
+        
       }
     }
+    // ion-list.list {
+    //   padding-left: 200px;
+    //   padding-right: 200px;
+    //
+    //   .reverse {
+    //     background-color: transparent;
+    //     color: $orange;
+    //   }
+    // }
   }
 }
