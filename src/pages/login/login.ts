@@ -68,10 +68,10 @@ export class LoginPage implements OnInit {
     this.storage.get('credits').then(res => {
       if (res) {
         let user = JSON.parse(res);
-        this.sign_in({
-          'email': user.email,
-          'password': user.password
-        });
+        // this.sign_in({
+        //   'email': user.email,
+        //   'password': user.password
+        // });
       }
     });
   }

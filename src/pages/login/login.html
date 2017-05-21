@@ -6,6 +6,7 @@
 </ion-header>
 
 <ion-content padding>
+  <button class="register" (tap)="goto_registerPage()">S'enregistrer</button>
   <div class="logo">
     <img src="assets/images/backstat.png" alt="">
   </div>
@@ -34,17 +35,16 @@
       </ion-item>
     </ion-list> -->
 
-    <div class="input">
+    <div>
       <label for="">Adresse Email</label>
-      <input type="text" placeholder="E-mail"/>
-    </div>
-    <div class="input">
-      <label for="">Mot de passe</label>
-      <input type="password" placeholder="Password"/>
+      <input type="text" placeholder="E-mail" formControlName="email"/>
     </div>
     <div>
-      <button>Coucou</button>
+      <label for="">Mot de passe</label>
+      <input type="password" placeholder="Password" formControlName="password"/>
     </div>
+
+    <button type="submit" [disabled]="!login_form.valid">Connexion</button>
     <!-- <input type="checkbox"/> -->
     <!-- <label>Remember Me ?</label> -->
     <!-- <button type="button" name="button">Connexion</button> -->
