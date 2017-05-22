@@ -7,6 +7,7 @@ import { Club } from '../../classes/club.class';
 import { RegisterUser } from '../../classes/user.class';
 
 @Component({
+  selector: 'register-page',
   templateUrl: 'register.html',
   providers: [RegisterService]
 })

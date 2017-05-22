@@ -88,6 +88,8 @@ export class LoginPage implements OnInit {
     // Check the storage for auto signin
     this.lf_credits_storage();
 
+this.modalCtrl.create(RegisterPage).present();
+
     // Get the email from the RegisterPage
     if (typeof this.navParams.get('email') !== 'undefined') {
       this.login_form.setValue({

@@ -6,48 +6,64 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <form [formGroup]="register_form" novalidate (ngSubmit)="register(register_form.value, register_form.valid)">
+
+    <div class="field">
+      <label for="">Adresse E-mail</label>
+      <input type="text" placeholder="steph.curry@gmail.com" formControlName="email">
+    </div>
+
+    <div class="field">
+      <label for="">Nom de famille</label>
+      <input type="text" placeholder="Curry" formControlName="lastname">
+    </div>
+    <!--
     <ion-list>
 
       <ion-item [class.error]="!(register_form.controls.email.valid || (register_form.controls.email.pristine))">
         <ion-label>E-mail*
           <input type="text" placeholder="steph.curry@gmail.com" formControlName="email">
         </ion-label>
-      </ion-item><!-- Email -->
+      </ion-item>--><!-- Email -->
 
+      <!--
       <ion-item [class.error]="!(register_form.controls.lastname.valid || (register_form.controls.lastname.pristine))">
         <ion-label>Nom*
           <input type="text" placeholder="Curry" formControlName="lastname">
         </ion-label>
-      </ion-item><!-- Lastname -->
+      </ion-item>--><!-- Lastname -->
 
+      <!--
       <ion-item [class.error]="!(register_form.controls.firstname.valid || (register_form.controls.firstname.pristine))">
         <ion-label>Prenom*
           <input type="text" placeholder="Stephen" formControlName="firstname">
         </ion-label>
-      </ion-item><!-- firstname -->
+      </ion-item>--><!-- firstname -->
 
+      <!--
       <ion-item [class.error]="!(register_form.controls.password.valid || (register_form.controls.password.pristine))">
         <ion-label>Mot de passe*
           <input type="password" placeholder="P@ssword" formControlName="password">
         </ion-label>
       </ion-item>
-
+-->
+      <!--
       <ion-item [class.error]="!(register_form.controls.confirm_pwd.valid || (register_form.controls.confirm_pwd.pristine))">
         <ion-label>Confirmation du mot de passe*
           <input type="password" placeholder="P@ssword" formControlName="confirm_pwd">
         </ion-label>
       </ion-item>
-
+-->
+      <!--
       <ion-item>
         <ion-label>Equipe*</ion-label>
         <ion-select formControlName="club_id">
           <ion-option *ngFor="let club of clubs" value="{{club._id}}">{{club.name}}</ion-option>
         </ion-select>
       </ion-item>
-
       <button type="submit" [disabled]="!register_form.valid" ion-button full color="tango">Créer mon compte</button>
     </ion-list>
+  -->
   </form>
 </ion-content>
