@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { Club } from '../../classes/club.class';
 import { RegisterUser } from '../../classes/user.class';
+import { CLUBS } from '../../mocks/clubs.mock';
 
 @Injectable()
 export class RegisterService {
@@ -18,9 +19,13 @@ export class RegisterService {
     let headers = new Headers(this.headers);
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(`${this.config.apiEndpoint}clubs`, options)
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    if (this.config.network) {
+      return this.http.get(`${this.config.apiEndpoint}clubs`, options)
+        .map((res: Response) => res.json())
+        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    } else {
+      return Observable.of(CLUBS);
+    }
   };
 
   sign_up(guest: RegisterUser): Observable<Object> { // +++++++++++++++++++++++++++++++++++++++++++++++++> Sign up

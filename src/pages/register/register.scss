@@ -1,18 +1,38 @@
 register-page {
-  .field {
-    display: flex;
-    width: 100%;
-    height: 50px;
-    font-size: x-large;
-
-    label {
-      width: 40%;
-      height: 100%;
+  .content {
+    background-color: color($colors, bleufonce);
+  }
+  form {
+    padding: 20px;
+    .field {
+      width: 100%;
+      height: 60px;
+      font-size: x-large;
+      margin-bottom: 20px;
+      background-color: white;
+      display: flex;
+      i {
+        margin: auto;
+        width: 60px;
+        text-align: center;
+        color: color($colors, bleufonce);
+      }
+      input {
+        width: calc(100% - 45px);
+        padding-left: 10px;
+        height: 100%;
+      }
     }
-
-    input {
-      width: 60%;
-      height: 100%;
+    .splited {
+      display: flex;
+      >.field {
+        &:first-child {
+          margin-right: 5px; 
+        }
+        &:last-child {
+          margin-left: 5px; 
+        }
+      }
     }
   }
 }
